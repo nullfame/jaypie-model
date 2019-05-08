@@ -1,0 +1,49 @@
+{
+  "name": "jaypie",
+  "version": "0.0.1",
+  "description": "JSON:API Gateway for AWS Lambda in Node.js",
+  "scripts": {
+    "lint": "eslint 'src/'; exit 0",
+    "format": "eslint 'src/' --fix; exit 0",
+    "test": "jest src/",
+    "doc": "esdoc",
+    "doc:clean": "rimraf docs/",
+    "build": "echo \"Error: no build specified\" && exit 1",
+    "deploy": "echo \"Error: no deploy specified\" && exit 1",
+    "intentionally-blank": "echo \"This script intentionally left blank as the last script in the scripts block\""
+  },
+  "author": "Adam Finlayson",
+  "repository": "github:nullfame/jaypie",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "esdoc": "^1.1.0",
+    "esdoc-standard-plugin": "^1.0.0",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-prettier": "^4.3.0",
+    "eslint-plugin-import": "^2.17.2",
+    "eslint-plugin-jest": "^22.6.4",
+    "eslint-plugin-prettier": "^3.1.0",
+    "husky": "^2.3.0",
+    "jest": "^24.8.0",
+    "jest-extended": "^0.11.1",
+    "lint-staged": "^8.1.7",
+    "prettier": "^1.17.1",
+    "rimraf": "^2.6.3"
+  },
+  "dependencies": {},
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
+  }
+}
