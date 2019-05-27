@@ -2,7 +2,7 @@
   "name": "jaypie",
   "version": "0.0.1",
   "description": "JSON:API Gateway for AWS Lambda in Node.js",
-  "main": "src/index.js",
+  "main": "index.js",
   "scripts": {
     "lint": "eslint 'src/'; exit 0",
     "format": "eslint 'src/' --fix; exit 0",
