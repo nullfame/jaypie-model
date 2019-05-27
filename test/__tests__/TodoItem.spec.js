@@ -26,7 +26,7 @@ describe("ClassicTodoItem", () => {
 
 describe("TodoItem from Model.new", () => {
   describe("Using configured attributes", () => {
-    it.skip("should have a default state", () => {
+    it("should have a default state", () => {
       const item = new TodoItem();
       expect(item.text).toEqual(null);
       expect(item.done).toEqual(false);

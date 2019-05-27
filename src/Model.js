@@ -24,7 +24,11 @@ export default {
               );
           }
 
-          this[attribute.name] = undefined;
+          if ("default" in attribute) {
+            this[attribute.name] = attribute.default;
+          } else {
+            this[attribute.name] = undefined;
+          }
           if (attribute.name in initialValues) {
             this[attribute.name] = initialValues[attribute.name];
           }
