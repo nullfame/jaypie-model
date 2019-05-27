@@ -1,8 +1,5 @@
-import { Model } from "../..";
-
-export default class TodoItem extends Model {
+export default class TodoItem {
   constructor({ text = null, done = false } = {}) {
-    super();
     this.text = text;
     this.done = done;
   }

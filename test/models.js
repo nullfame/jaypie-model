@@ -1,4 +1,4 @@
-import TodoItemClass from "./models/TodoItem";
+import { Model } from "..";
 
 // eslint-disable-next-line import/prefer-default-export
-export const TodoItem = TodoItemClass;
+export const TodoItem = Model.new(["text", "done"]);
