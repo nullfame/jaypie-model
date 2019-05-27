@@ -1,6 +1,6 @@
 export default {
   new: attributes => {
-    const NewModel = class {
+    const Model = class {
       constructor(initialValues = {}) {
         attributes.forEach(attribute => {
           this[attribute] = undefined;
@@ -11,6 +11,6 @@ export default {
       }
     };
 
-    return NewModel;
+    return Model;
   }
 };
