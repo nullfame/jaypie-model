@@ -1,4 +1,4 @@
-import response from "../handler";
+import response from "..";
 
 describe("Handler response", () => {
   const actualResponse = response();
