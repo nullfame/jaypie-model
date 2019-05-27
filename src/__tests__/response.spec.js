@@ -1,7 +1,7 @@
-import response from "..";
+import { defaultHandler } from "..";
 
 describe("Handler response", () => {
-  const actualResponse = response();
+  const actualResponse = defaultHandler();
 
   it("should have a statusCode", () => {
     expect(actualResponse).toContainKey("statusCode");
