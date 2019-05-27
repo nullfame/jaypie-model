@@ -1,7 +1,5 @@
-export default class Model {
-  // constructor() {}
-
-  static new(attributes) {
+export default {
+  new: attributes => {
     const NewModel = class {
       constructor(initialValues = {}) {
         attributes.forEach(attribute => {
@@ -15,4 +13,4 @@ export default class Model {
 
     return NewModel;
   }
-}
+};
