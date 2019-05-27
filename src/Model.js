@@ -1,4 +1,8 @@
 export default {
+  /**
+   * Create a new model
+   * @param {string[]} attributes fields on this model (defaults to type string)
+   */
   new: attributes => {
     const Model = class {
       constructor(initialValues = {}) {
