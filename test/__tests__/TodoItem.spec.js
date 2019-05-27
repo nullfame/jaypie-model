@@ -1,4 +1,4 @@
-import TodoItem from "../TodoItem";
+import { TodoItem } from "../models";
 
 describe("TodoItem", () => {
   it("should have a default state", () => {
