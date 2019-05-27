@@ -1,5 +1,7 @@
 // Main Jaypie export
 
+import ModelClass from "./Model";
+
 // eslint-disable-next-line no-unused-vars
 const handler = event => {
   return {
@@ -11,3 +13,4 @@ const handler = event => {
 
 export default handler;
 export const defaultHandler = handler;
+export const Model = ModelClass;
