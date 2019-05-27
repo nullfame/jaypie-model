@@ -7,9 +7,26 @@ export default {
     const Model = class {
       constructor(initialValues = {}) {
         attributes.forEach(attribute => {
-          this[attribute] = undefined;
-          if (attribute in initialValues) {
-            this[attribute] = initialValues[attribute];
+          switch (typeof attribute) {
+            case "string":
+              // eslint-disable-next-line no-param-reassign
+              attribute = { name: attribute };
+              break;
+            case "object":
+              if (!("name" in attribute))
+                throw Error(
+                  "Jaypie: Model.new: attribute missing 'name' (invalid configuration)"
+                );
+              break;
+            default:
+              throw Error(
+                "Jaypie: Model.new: unexpected attribute type (invalid configuration)"
+              );
+          }
+
+          this[attribute.name] = undefined;
+          if (attribute.name in initialValues) {
+            this[attribute.name] = initialValues[attribute.name];
           }
         });
       }
