@@ -13,10 +13,11 @@ export default {
               attribute = { name: attribute };
               break;
             case "object":
-              if (!("name" in attribute))
+              if (!("name" in attribute)) {
                 throw Error(
                   "Jaypie: Model.new: attribute missing 'name' (invalid configuration)"
                 );
+              }
               break;
             default:
               throw Error(
