@@ -3,7 +3,7 @@ import Model from "../Model";
 describe("TodoItem from Model.new", () => {
   let TestModel;
 
-  describe("Using configured attributes", () => {
+  describe("Using configured attributes array", () => {
     beforeEach(() => {
       TestModel = Model.new([
         { name: "text", default: null },
@@ -22,7 +22,24 @@ describe("TodoItem from Model.new", () => {
       expect(item.text).toEqual("My Item");
       expect(item.done).toEqual(true);
     });
-  });
+
+    describe("Error cases with configured attributes array", () => {
+      it("throws if attribute is missing a name", () => {
+        expect(() => {
+          TestModel = Model.new([{ default: false }]);
+          // eslint-disable-next-line no-unused-vars
+          const item = new TestModel(); // Should throw
+        }).toThrow();
+      });
+      it("throws if attribute isn't string or object", () => {
+        expect(() => {
+          TestModel = Model.new([1]);
+          // eslint-disable-next-line no-unused-vars
+          const item = new TestModel(); // Should throw
+        }).toThrow();
+      });
+    });
+  }); // "Using configured attributes array"
 
   describe("Using attributes array of strings (becoming untyped variables, defaulting to undefined)", () => {
     beforeEach(() => {
