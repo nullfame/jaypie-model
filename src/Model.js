@@ -38,5 +38,11 @@ export default {
     };
 
     return Model;
+  },
+  /** Defines data types models attributes may have */
+  type: {
+    any: "ANY",
+    boolean: "BOOLEAN",
+    string: "STRING"
   }
 };
