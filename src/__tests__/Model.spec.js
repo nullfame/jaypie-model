@@ -15,6 +15,13 @@ describe("TodoItem from Model.new", () => {
       expect(item.text).toEqual(null);
       expect(item.done).toEqual(false);
     });
+    it("allows state to be changed", () => {
+      const item = new TestModel();
+      item.text = "My Item";
+      item.done = true;
+      expect(item.text).toEqual("My Item");
+      expect(item.done).toEqual(true);
+    });
   });
 
   describe("Using attributes array of strings (becoming untyped variables, defaulting to undefined)", () => {
