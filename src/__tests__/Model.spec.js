@@ -26,7 +26,7 @@ describe("TodoItem from Model.new", () => {
     describe("Error cases with configured attributes array", () => {
       it.todo("supports type any");
       it.todo("supports type string");
-      it.todo("supports type string");
+      it.todo("supports type boolean");
       it.todo("throws if default value doesn't match type");
       it.todo("throws if set values doesn't match type");
 
