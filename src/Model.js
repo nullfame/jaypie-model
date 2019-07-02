@@ -18,14 +18,14 @@ export default {
             case "object":
               if (!("name" in attribute)) {
                 throw Error(
-                  "Jaypie: Model.new: attribute missing 'name' (invalid configuration)"
+                  "Jaypie: Model.new: Invalid Configuration: Missing Required: name"
                 );
               }
               break;
             // Otherwise, error out
             default:
               throw Error(
-                "Jaypie: Model.new: unexpected attribute type (invalid configuration)"
+                "Jaypie: Model.new: Invalid Configuration: Invalid Type: attribute must be type (object|string)"
               );
           }
 
