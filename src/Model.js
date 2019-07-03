@@ -6,8 +6,9 @@ export default {
   new: attributes => {
     const Model = class {
       constructor(initialValues = {}) {
-        this.private = {};
-        this.private.values = {};
+        // Store all private members in a WeakMap
+        this.private = new WeakMap();
+        this.private.set(this, {});
 
         // Iterate attributes and create the Model object
         attributes.forEach(attribute => {
@@ -34,12 +35,15 @@ export default {
           }
 
           // Create attribute as an object with getters/setters
+          this.private.get(this)[attribute.name] = {};
           Object.defineProperty(this, attribute.name, {
             get() {
-              return this.private.values[attribute.name];
+              const atributeInternals = this.private.get(this)[attribute.name];
+              return atributeInternals.value;
             },
             set(x) {
-              this.private.values[attribute.name] = x;
+              const atributeInternals = this.private.get(this)[attribute.name];
+              atributeInternals.value = x;
             }
           });
 
