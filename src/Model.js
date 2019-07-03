@@ -6,6 +6,8 @@ export default {
   new: attributes => {
     const Model = class {
       constructor(initialValues = {}) {
+        this.private = {};
+        this.private.values = {};
         attributes.forEach(attribute => {
           // Make sure the attribute is defined as a string or an object
           switch (typeof attribute) {
@@ -28,6 +30,16 @@ export default {
                 "Jaypie: Model.new: Invalid Configuration: Invalid Type: attribute must be type (object|string)"
               );
           }
+
+          // Create attribute as an object with getters/setters
+          Object.defineProperty(this, attribute.name, {
+            get() {
+              return this.private.values[attribute.name];
+            },
+            set(x) {
+              this.private.values[attribute.name] = x;
+            }
+          });
 
           // Set the default value of this attribute or null
           if ("default" in attribute) {
