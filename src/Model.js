@@ -40,7 +40,7 @@ export default {
           if (attribute.name in initialValues) {
             this[attribute.name] = initialValues[attribute.name];
           }
-        });
+        }); // END foreach attribute
       } // END Model.new class constructor
     }; // END Model.new class
 
