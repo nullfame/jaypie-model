@@ -8,6 +8,8 @@ export default {
       constructor(initialValues = {}) {
         this.private = {};
         this.private.values = {};
+
+        // Iterate attributes and create the Model object
         attributes.forEach(attribute => {
           // Make sure the attribute is defined as a string or an object
           switch (typeof attribute) {
