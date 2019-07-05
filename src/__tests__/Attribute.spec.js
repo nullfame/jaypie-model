@@ -8,6 +8,17 @@ describe("Attribute class", () => {
     });
   });
   describe("Error cases", () => {
-    //
+    it("requires name", () => {
+      expect(() => {
+        const attribute = new Attribute();
+        attribute.name = "item";
+      }).toThrow();
+    });
+    it("requires name to be a string", () => {
+      expect(() => {
+        const attribute = new Attribute({ name: false });
+        expect(attribute.name).toBeDefined();
+      }).toThrow();
+    });
   });
 });
