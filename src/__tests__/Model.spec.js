@@ -23,13 +23,11 @@ describe("TodoItem from Model.new", () => {
       expect(item.done).toEqual(true);
     });
 
-    describe("Error cases with configured attributes array", () => {
-      it.todo("supports type any");
-      it.todo("supports type string");
-      it.todo("supports type boolean");
-      it.todo("throws if default value doesn't match type");
-      it.todo("throws if set values doesn't match type");
+    it.todo("supports type any");
+    it.todo("supports type string");
+    it.todo("supports type boolean");
 
+    describe("Error cases with configured attributes array", () => {
       it("throws if attribute is missing a name", () => {
         expect(() => {
           TestModel = Model.new([{ default: false }]);
@@ -45,6 +43,9 @@ describe("TodoItem from Model.new", () => {
         }).toThrow();
       });
     });
+
+    it.todo("throws if default value doesn't match type");
+    it.todo("throws if setting values don't match type");
   }); // "Using configured attributes array"
 
   describe("Using attributes array of strings (becoming untyped variables, defaulting to undefined)", () => {
