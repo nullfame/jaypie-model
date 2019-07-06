@@ -17,14 +17,16 @@ describe("Attribute class", () => {
       it("supports type 'string'", () => {
         const attribute = new Attribute({
           name: "text",
-          type: Model.type.string
+          type: Model.type.string,
+          value: "Work on Jaypie"
         });
         expect(attribute.type).toEqual(Model.type.string);
       });
       it("supports type 'boolean'", () => {
         const attribute = new Attribute({
           name: "text",
-          type: Model.type.boolean
+          type: Model.type.boolean,
+          value: false
         });
         expect(attribute.type).toEqual(Model.type.boolean);
       });
@@ -48,6 +50,28 @@ describe("Attribute class", () => {
         const attribute = new Attribute({ name: "text", type: "bogus" });
         expect(attribute.name).toBeDefined();
       }).toThrow();
+    });
+    describe("Attribute errors: enforces type values", () => {
+      it("Enforces string type", () => {
+        expect(() => {
+          const attribute = new Attribute({
+            name: "text",
+            type: Model.type.string,
+            value: true
+          });
+          expect(attribute.name).toBeDefined();
+        }).toThrow();
+      });
+      it("Enforces boolean type", () => {
+        expect(() => {
+          const attribute = new Attribute({
+            name: "done",
+            type: Model.type.boolean,
+            value: "Hello"
+          });
+          expect(attribute.name).toBeDefined();
+        }).toThrow();
+      });
     });
   });
 });
