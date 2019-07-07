@@ -20,7 +20,7 @@ function validateValueIsModelType(value, type) {
 
     default:
       throw Error(
-        "Jaypie: Attribute: Invalid Configuration: Invalid Type: ".type
+        `Jaypie: Attribute: Invalid Configuration: Invalid Type: ${type}`
       );
   }
   ow(value, predicate);
