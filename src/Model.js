@@ -1,3 +1,5 @@
+import Attribute from "./Attribute";
+
 export default {
   /**
    * Create a new model
@@ -66,9 +68,5 @@ export default {
   }, // END Model.new
 
   /** Defines data types models attributes may have */
-  type: {
-    any: "ANY",
-    boolean: "BOOLEAN",
-    string: "STRING"
-  } // END Model.type
+  type: Attribute.type
 };
