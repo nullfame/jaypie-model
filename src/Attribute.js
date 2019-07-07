@@ -48,6 +48,7 @@ class Attribute {
     // Set internal values
     this.private.get(this).name = name;
     this.private.get(this).type = type;
+    this.private.get(this).value = value;
 
     // Allow read-only access to name
     Object.defineProperty(this, "name", {
@@ -68,6 +69,11 @@ class Attribute {
         throw Error(
           "Jaypie: Attribute: Unsupported Operation: Cannot assign to read-only property: type"
         );
+      }
+    });
+    Object.defineProperty(this, "value", {
+      get() {
+        return this.private.get(this).value;
       }
     });
   }

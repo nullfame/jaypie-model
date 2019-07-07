@@ -15,6 +15,7 @@ describe("Attribute class", () => {
           type: Attribute.type.any
         });
         expect(attribute.type).toEqual(Attribute.type.any);
+        expect(attribute.value).toEqual(undefined);
       });
       it("supports type 'boolean'", () => {
         const attribute = new Attribute({
@@ -23,14 +24,17 @@ describe("Attribute class", () => {
           value: false
         });
         expect(attribute.type).toEqual(Attribute.type.boolean);
+        expect(attribute.value).toEqual(false);
       });
       it("supports type 'date'", () => {
+        const now = new Date();
         const attribute = new Attribute({
           name: "text",
           type: Attribute.type.date,
-          value: new Date()
+          value: now
         });
         expect(attribute.type).toEqual(Attribute.type.date);
+        expect(attribute.value).toEqual(now);
       });
       it("supports type 'number'", () => {
         const attribute = new Attribute({
@@ -39,6 +43,7 @@ describe("Attribute class", () => {
           value: 12
         });
         expect(attribute.type).toEqual(Attribute.type.number);
+        expect(attribute.value).toEqual(12);
       });
       it("supports type 'string'", () => {
         const attribute = new Attribute({
@@ -47,6 +52,7 @@ describe("Attribute class", () => {
           value: "Work on Jaypie"
         });
         expect(attribute.type).toEqual(Attribute.type.string);
+        expect(attribute.value).toEqual("Work on Jaypie");
       });
     });
   });
