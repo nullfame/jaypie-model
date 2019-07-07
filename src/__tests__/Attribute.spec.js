@@ -54,7 +54,7 @@ describe("Attribute class", () => {
     it("requires name", () => {
       expect(() => {
         const attribute = new Attribute();
-        attribute.name = "item";
+        expect(attribute.name).toBeDefined();
       }).toThrow();
     });
     it("requires name to be a string", () => {
