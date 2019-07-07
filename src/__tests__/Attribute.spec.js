@@ -19,7 +19,7 @@ describe("Attribute class", () => {
       });
       it("supports type 'boolean'", () => {
         const attribute = new Attribute({
-          name: "text",
+          name: "done",
           type: Attribute.type.boolean,
           value: false
         });
@@ -29,7 +29,7 @@ describe("Attribute class", () => {
       it("supports type 'date'", () => {
         const now = new Date();
         const attribute = new Attribute({
-          name: "text",
+          name: "created",
           type: Attribute.type.date,
           value: now
         });
@@ -75,7 +75,7 @@ describe("Attribute class", () => {
         expect(attribute.name).toBeDefined();
       }).toThrow();
     });
-    describe("Attribute errors: enforces type values", () => {
+    describe("Attribute errors: enforces type values during initialization", () => {
       it("Enforces boolean type", () => {
         expect(() => {
           const attribute = new Attribute({
