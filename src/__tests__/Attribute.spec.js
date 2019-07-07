@@ -24,6 +24,14 @@ describe("Attribute class", () => {
         });
         expect(attribute.type).toEqual(Attribute.type.boolean);
       });
+      it("supports type 'number'", () => {
+        const attribute = new Attribute({
+          name: "count",
+          type: Attribute.type.number,
+          value: 12
+        });
+        expect(attribute.type).toEqual(Attribute.type.number);
+      });
       it("supports type 'string'", () => {
         const attribute = new Attribute({
           name: "text",
@@ -60,6 +68,16 @@ describe("Attribute class", () => {
             name: "done",
             type: Attribute.type.boolean,
             value: "Hello"
+          });
+          expect(attribute.name).toBeDefined();
+        }).toThrow();
+      });
+      it("Enforces number type", () => {
+        expect(() => {
+          const attribute = new Attribute({
+            name: "count",
+            type: Attribute.type.number,
+            value: null
           });
           expect(attribute.name).toBeDefined();
         }).toThrow();
