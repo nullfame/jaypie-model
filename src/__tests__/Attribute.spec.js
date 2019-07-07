@@ -111,5 +111,23 @@ describe("Attribute class", () => {
         }).toThrow();
       });
     });
+    describe("Attribute errors: read-only fields", () => {
+      it("doesn't allow setting name", () => {
+        const attribute = new Attribute({ name: "text" });
+        expect(attribute.name).toEqual("text");
+        expect(() => {
+          attribute.name = "Hello";
+        }).toThrow();
+        expect(attribute.name).toEqual("text");
+      });
+      it("doesn't allow setting type", () => {
+        const attribute = new Attribute({ name: "text" });
+        expect(attribute.type).toEqual(Attribute.type.any);
+        expect(() => {
+          attribute.type = Attribute.type.string;
+        }).toThrow();
+        expect(attribute.type).toEqual(Attribute.type.any);
+      });
+    });
   });
 });

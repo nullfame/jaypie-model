@@ -53,11 +53,21 @@ class Attribute {
     Object.defineProperty(this, "name", {
       get() {
         return this.private.get(this).name;
+      },
+      set() {
+        throw Error(
+          "Jaypie: Attribute: Unsupported Operation: Cannot assign to read-only property: name"
+        );
       }
     });
     Object.defineProperty(this, "type", {
       get() {
         return this.private.get(this).type;
+      },
+      set() {
+        throw Error(
+          "Jaypie: Attribute: Unsupported Operation: Cannot assign to read-only property: type"
+        );
       }
     });
   }
