@@ -41,9 +41,25 @@ class Attribute {
     ow(type, ow.string.oneOf(Object.values(attributeType)));
     validateValueIsModelType(value, type);
 
+    // Initialize WeakMap for internals
+    this.private = new WeakMap();
+    this.private.set(this, {});
+
     // Set internal values
-    this.name = name;
-    this.type = type;
+    this.private.get(this).name = name;
+    this.private.get(this).type = type;
+
+    // Allow read-only access to name
+    Object.defineProperty(this, "name", {
+      get() {
+        return this.private.get(this).name;
+      }
+    });
+    Object.defineProperty(this, "type", {
+      get() {
+        return this.private.get(this).type;
+      }
+    });
   }
 }
 Attribute.type = attributeType;
