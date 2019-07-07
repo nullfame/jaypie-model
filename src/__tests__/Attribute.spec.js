@@ -16,14 +16,6 @@ describe("Attribute class", () => {
         });
         expect(attribute.type).toEqual(Attribute.type.any);
       });
-      it("supports type 'string'", () => {
-        const attribute = new Attribute({
-          name: "text",
-          type: Attribute.type.string,
-          value: "Work on Jaypie"
-        });
-        expect(attribute.type).toEqual(Attribute.type.string);
-      });
       it("supports type 'boolean'", () => {
         const attribute = new Attribute({
           name: "text",
@@ -31,6 +23,14 @@ describe("Attribute class", () => {
           value: false
         });
         expect(attribute.type).toEqual(Attribute.type.boolean);
+      });
+      it("supports type 'string'", () => {
+        const attribute = new Attribute({
+          name: "text",
+          type: Attribute.type.string,
+          value: "Work on Jaypie"
+        });
+        expect(attribute.type).toEqual(Attribute.type.string);
       });
     });
   });
