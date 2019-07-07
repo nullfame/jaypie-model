@@ -36,13 +36,14 @@ function validateValueIsModelType(value, type) {
 
 class Attribute {
   constructor({ name, type = attributeType.any, value = undefined } = {}) {
+    // Validate parameters
     ow(name, ow.string);
-    this.name = name;
-
     ow(type, ow.string.oneOf(Object.values(attributeType)));
-    this.type = type;
-
     validateValueIsModelType(value, type);
+
+    // Set internal values
+    this.name = name;
+    this.type = type;
   }
 }
 Attribute.type = attributeType;
