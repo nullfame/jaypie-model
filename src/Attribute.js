@@ -1,16 +1,20 @@
 import ow from "ow";
 
-import Model from "./Model";
+const attributeType = {
+  any: "ANY",
+  boolean: "BOOLEAN",
+  string: "STRING"
+};
 
 function validateValueIsModelType(value, type) {
   let predicate;
   switch (type) {
-    case Model.type.any:
+    case attributeType.any:
       return;
-    case Model.type.boolean:
+    case attributeType.boolean:
       predicate = ow.optional.boolean;
       break;
-    case Model.type.string:
+    case attributeType.string:
       predicate = ow.optional.string;
       break;
 
@@ -22,14 +26,16 @@ function validateValueIsModelType(value, type) {
   ow(value, predicate);
 }
 
-export default class Attribute {
-  constructor({ name, type = Model.type.any, value = undefined } = {}) {
+class Attribute {
+  constructor({ name, type = attributeType.any, value = undefined } = {}) {
     ow(name, ow.string);
     this.name = name;
 
-    ow(type, ow.string.oneOf(Object.values(Model.type)));
+    ow(type, ow.string.oneOf(Object.values(attributeType)));
     this.type = type;
 
     validateValueIsModelType(value, type);
   }
 }
+Attribute.type = attributeType;
+export default Attribute;
