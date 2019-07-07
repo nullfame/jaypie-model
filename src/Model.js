@@ -37,7 +37,9 @@ export default {
           }
 
           // Create attribute as an object with getters/setters
-          this.private.get(this)[attribute.name] = {};
+          this.private.get(this)[attribute.name] = new Attribute({
+            name: attribute.name
+          });
           Object.defineProperty(this, attribute.name, {
             get() {
               const atributeInternals = this.private.get(this)[attribute.name];
