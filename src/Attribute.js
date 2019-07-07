@@ -74,6 +74,10 @@ class Attribute {
     Object.defineProperty(this, "value", {
       get() {
         return this.private.get(this).value;
+      },
+      set(newValue) {
+        validateValueIsModelType(newValue, this.type);
+        this.private.get(this).value = newValue;
       }
     });
   }

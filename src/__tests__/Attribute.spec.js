@@ -55,6 +55,67 @@ describe("Attribute class", () => {
         expect(attribute.value).toEqual("Work on Jaypie");
       });
     });
+
+    describe("Updating values", () => {
+      const before = new Date("March 14, 2015 09:26:53");
+      const now = new Date();
+      it("allows updating 'any' fields", () => {
+        const attribute = new Attribute({
+          name: "wildcard",
+          type: Attribute.type.any,
+          value: null
+        });
+        expect(attribute.value).toEqual(null);
+        attribute.value = true;
+        expect(attribute.value).toEqual(true);
+        attribute.value = now;
+        expect(attribute.value).toEqual(now);
+        attribute.value = 12;
+        expect(attribute.value).toEqual(12);
+        attribute.value = "Work on Jaypie";
+        expect(attribute.value).toEqual("Work on Jaypie");
+      });
+      it("allows updating boolean fields", () => {
+        const attribute = new Attribute({
+          name: "done",
+          type: Attribute.type.boolean,
+          value: false
+        });
+        expect(attribute.value).toEqual(false);
+        attribute.value = true;
+        expect(attribute.value).toEqual(true);
+      });
+      it("allows updating date fields", () => {
+        const attribute = new Attribute({
+          name: "created",
+          type: Attribute.type.date,
+          value: now
+        });
+        expect(attribute.value).toEqual(now);
+        attribute.value = before;
+        expect(attribute.value).toEqual(before);
+      });
+      it("allows updating number fields", () => {
+        const attribute = new Attribute({
+          name: "count",
+          type: Attribute.type.number,
+          value: 12
+        });
+        expect(attribute.value).toEqual(12);
+        attribute.value = 144;
+        expect(attribute.value).toEqual(144);
+      });
+      it("allows updating string fields", () => {
+        const attribute = new Attribute({
+          name: "text",
+          type: Attribute.type.string,
+          value: "Work on Jaypie"
+        });
+        expect(attribute.value).toEqual("Work on Jaypie");
+        attribute.value = "Finish Jaypie";
+        expect(attribute.value).toEqual("Finish Jaypie");
+      });
+    });
   });
   describe("Error cases", () => {
     it("requires name", () => {
@@ -114,6 +175,48 @@ describe("Attribute class", () => {
             value: true
           });
           expect(attribute.name).toBeDefined();
+        }).toThrow();
+      });
+    });
+    describe("Attribute errors: enforces type values when values are set", () => {
+      it("enforces boolean types", () => {
+        const attribute = new Attribute({
+          name: "done",
+          type: Attribute.type.boolean,
+          value: false
+        });
+        expect(() => {
+          attribute.value = null;
+        }).toThrow();
+      });
+      it("enforces date types", () => {
+        const attribute = new Attribute({
+          name: "created",
+          type: Attribute.type.date,
+          value: new Date()
+        });
+        expect(() => {
+          attribute.value = null;
+        }).toThrow();
+      });
+      it("enforces number types", () => {
+        const attribute = new Attribute({
+          name: "count",
+          type: Attribute.type.number,
+          value: 12
+        });
+        expect(() => {
+          attribute.value = null;
+        }).toThrow();
+      });
+      it("enforces string types", () => {
+        const attribute = new Attribute({
+          name: "text",
+          type: Attribute.type.string,
+          value: "Work on Jaypie"
+        });
+        expect(() => {
+          attribute.value = null;
         }).toThrow();
       });
     });
