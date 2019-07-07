@@ -3,6 +3,7 @@ import ow from "ow";
 const attributeType = {
   any: "ANY",
   boolean: "BOOLEAN",
+  date: "DATE",
   number: "NUMBER",
   string: "STRING"
 };
@@ -14,6 +15,9 @@ function validateValueIsModelType(value, type) {
       return;
     case attributeType.boolean:
       predicate = ow.optional.boolean;
+      break;
+    case attributeType.date:
+      predicate = ow.optional.date;
       break;
     case attributeType.number:
       predicate = ow.optional.number;

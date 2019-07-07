@@ -24,6 +24,14 @@ describe("Attribute class", () => {
         });
         expect(attribute.type).toEqual(Attribute.type.boolean);
       });
+      it("supports type 'date'", () => {
+        const attribute = new Attribute({
+          name: "text",
+          type: Attribute.type.date,
+          value: new Date()
+        });
+        expect(attribute.type).toEqual(Attribute.type.date);
+      });
       it("supports type 'number'", () => {
         const attribute = new Attribute({
           name: "count",
@@ -77,6 +85,16 @@ describe("Attribute class", () => {
           const attribute = new Attribute({
             name: "count",
             type: Attribute.type.number,
+            value: null
+          });
+          expect(attribute.name).toBeDefined();
+        }).toThrow();
+      });
+      it("Enforces date type", () => {
+        expect(() => {
+          const attribute = new Attribute({
+            name: "created",
+            type: Attribute.type.date,
             value: null
           });
           expect(attribute.name).toBeDefined();
