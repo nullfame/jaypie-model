@@ -54,22 +54,22 @@ describe("Attribute class", () => {
       }).toThrow();
     });
     describe("Attribute errors: enforces type values", () => {
-      it("Enforces string type", () => {
-        expect(() => {
-          const attribute = new Attribute({
-            name: "text",
-            type: Attribute.type.string,
-            value: true
-          });
-          expect(attribute.name).toBeDefined();
-        }).toThrow();
-      });
       it("Enforces boolean type", () => {
         expect(() => {
           const attribute = new Attribute({
             name: "done",
             type: Attribute.type.boolean,
             value: "Hello"
+          });
+          expect(attribute.name).toBeDefined();
+        }).toThrow();
+      });
+      it("Enforces string type", () => {
+        expect(() => {
+          const attribute = new Attribute({
+            name: "text",
+            type: Attribute.type.string,
+            value: true
           });
           expect(attribute.name).toBeDefined();
         }).toThrow();
