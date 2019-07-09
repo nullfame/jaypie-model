@@ -36,10 +36,15 @@ export default {
               );
           }
 
+          // Build attribute (object) parameters
+          const attributeParams = Object.assign({}, attribute);
+          attributeParams.value = attribute.default;
+          delete attributeParams.default;
+
           // Create attribute as an object with getters/setters
-          this.private.get(this)[attribute.name] = new Attribute({
-            name: attribute.name
-          });
+          this.private.get(this)[attribute.name] = new Attribute(
+            attributeParams
+          );
           Object.defineProperty(this, attribute.name, {
             get() {
               const atributeInternals = this.private.get(this)[attribute.name];
