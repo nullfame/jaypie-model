@@ -56,13 +56,6 @@ export default {
             }
           });
 
-          // Set the default value of this attribute or null
-          if ("default" in attribute) {
-            this[attribute.name] = attribute.default;
-          } else {
-            this[attribute.name] = undefined;
-          }
-
           // If an initial value was passed, use it
           if (attribute.name in initialValues) {
             this[attribute.name] = initialValues[attribute.name];
