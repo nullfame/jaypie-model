@@ -27,7 +27,18 @@ describe("TodoItem from Model.new", () => {
 
     describe("With types", () => {
       it.todo("supports type any");
-      it.todo("supports type boolean");
+      it("supports type boolean", () => {
+        TestModel = Model.new([
+          { name: "done", default: false, type: Model.type.boolean }
+        ]);
+        const item = new TestModel();
+        expect(item.done).toEqual(false);
+        item.done = true;
+        expect(item.done).toEqual(true);
+        expect(() => {
+          item.done = null;
+        }).toThrow();
+      });
       it.todo("supports type date");
       it.todo("supports type number");
       it.todo("supports type string");
