@@ -4,28 +4,34 @@ describe("TodoItem from Model.new", () => {
   let TestModel;
 
   describe("Using configured attributes array", () => {
-    beforeEach(() => {
-      TestModel = Model.new([
-        { name: "text", default: null },
-        { name: "done", default: false }
-      ]);
-    });
-    it("should allow default values", () => {
-      const item = new TestModel();
-      expect(item.text).toEqual(null);
-      expect(item.done).toEqual(false);
-    });
-    it("allows state to be changed", () => {
-      const item = new TestModel();
-      item.text = "My Item";
-      item.done = true;
-      expect(item.text).toEqual("My Item");
-      expect(item.done).toEqual(true);
+    describe("Without types", () => {
+      beforeEach(() => {
+        TestModel = Model.new([
+          { name: "text", default: null },
+          { name: "done", default: false }
+        ]);
+      });
+      it("should allow default values", () => {
+        const item = new TestModel();
+        expect(item.text).toEqual(null);
+        expect(item.done).toEqual(false);
+      });
+      it("allows state to be changed", () => {
+        const item = new TestModel();
+        item.text = "My Item";
+        item.done = true;
+        expect(item.text).toEqual("My Item");
+        expect(item.done).toEqual(true);
+      });
     });
 
-    it.todo("supports type any");
-    it.todo("supports type string");
-    it.todo("supports type boolean");
+    describe("With types", () => {
+      it.todo("supports type any");
+      it.todo("supports type boolean");
+      it.todo("supports type date");
+      it.todo("supports type number");
+      it.todo("supports type string");
+    });
 
     describe("Error cases with configured attributes array", () => {
       it("throws if attribute is missing a name", () => {
