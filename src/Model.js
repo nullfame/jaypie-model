@@ -3,7 +3,7 @@ import Attribute from "./Attribute";
 export default {
   /**
    * Create a new model
-   * @param {string[]|object[]} attributes fields on this model (defaults to type string)
+   * @param {string[]|object[]} attributes fields on this model (defaults to type any)
    */
   new: attributes => {
     const Model = class {
