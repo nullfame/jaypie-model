@@ -26,7 +26,22 @@ describe("TodoItem from Model.new", () => {
     });
 
     describe("With types", () => {
-      it.todo("supports type any");
+      it("supports type any", () => {
+        const now = new Date();
+        TestModel = Model.new([
+          { name: "junk", default: null, type: Model.type.any }
+        ]);
+        const item = new TestModel();
+        expect(item.junk).toEqual(null);
+        item.junk = true;
+        expect(item.junk).toEqual(true);
+        item.junk = now;
+        expect(item.junk).toEqual(now);
+        item.junk = 12;
+        expect(item.junk).toEqual(12);
+        item.junk = "Work on Jaypie";
+        expect(item.junk).toEqual("Work on Jaypie");
+      });
       it("supports type boolean", () => {
         TestModel = Model.new([
           { name: "done", default: false, type: Model.type.boolean }
@@ -39,9 +54,45 @@ describe("TodoItem from Model.new", () => {
           item.done = null;
         }).toThrow();
       });
-      it.todo("supports type date");
-      it.todo("supports type number");
-      it.todo("supports type string");
+      it("supports type date", () => {
+        const before = new Date("March 14, 2015 09:26:53");
+        const now = new Date();
+
+        TestModel = Model.new([
+          { name: "updated", default: before, type: Model.type.date }
+        ]);
+        const item = new TestModel();
+        expect(item.updated).toEqual(before);
+        item.updated = now;
+        expect(item.updated).toEqual(now);
+        expect(() => {
+          item.updated = null;
+        }).toThrow();
+      });
+      it("supports type number", () => {
+        TestModel = Model.new([
+          { name: "count", default: 12, type: Model.type.number }
+        ]);
+        const item = new TestModel();
+        expect(item.count).toEqual(12);
+        item.count = 144;
+        expect(item.count).toEqual(144);
+        expect(() => {
+          item.count = null;
+        }).toThrow();
+      });
+      it("supports type string", () => {
+        TestModel = Model.new([
+          { name: "text", default: "todo", type: Model.type.string }
+        ]);
+        const item = new TestModel({ text: "Work on Jaypie" });
+        expect(item.text).toEqual("Work on Jaypie");
+        item.text = "Finish Jaypie";
+        expect(item.text).toEqual("Finish Jaypie");
+        expect(() => {
+          item.text = null;
+        }).toThrow();
+      });
     });
 
     describe("Error cases with configured attributes array", () => {
