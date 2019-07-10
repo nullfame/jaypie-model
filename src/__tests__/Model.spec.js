@@ -113,7 +113,6 @@ describe("TodoItem from Model.new", () => {
     });
 
     it.todo("throws if default value doesn't match type");
-    it.todo("throws if setting values don't match type");
   }); // "Using configured attributes array"
 
   describe("Using attributes array of strings (becoming untyped variables, defaulting to undefined)", () => {
