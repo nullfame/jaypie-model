@@ -8,7 +8,7 @@ const attributeType = {
   string: "STRING"
 };
 
-function validateValueIsModelType(value, type) {
+function validateValueType(value, type) {
   let predicate;
   switch (type) {
     case attributeType.any:
@@ -39,7 +39,7 @@ class Attribute {
     // Validate parameters
     ow(name, ow.string);
     ow(type, ow.string.oneOf(Object.values(attributeType)));
-    validateValueIsModelType(value, type);
+    validateValueType(value, type);
 
     // Initialize WeakMap for internals
     this.private = new WeakMap();
@@ -76,7 +76,7 @@ class Attribute {
         return this.private.get(this).value;
       },
       set(newValue) {
-        validateValueIsModelType(newValue, this.type);
+        validateValueType(newValue, this.type);
         this.private.get(this).value = newValue;
       }
     });
