@@ -6,6 +6,16 @@ export default {
    * @param {string[]|object[]} attributes fields on this model (defaults to type any)
    */
   new: attributes => {
+    // Validate attribute params at class creation (before first instantiation)
+    attributes.forEach(attribute => {
+      if (typeof attribute === "object") {
+        if (attribute.type !== undefined && attribute.default !== undefined) {
+          Attribute.validateValueType(attribute.default, attribute.type);
+        }
+      }
+    });
+
+    // Build class to return
     const Model = class {
       constructor(initialValues = {}) {
         // Store all private members in a WeakMap

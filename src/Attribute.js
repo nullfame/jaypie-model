@@ -83,4 +83,5 @@ class Attribute {
   }
 }
 Attribute.type = attributeType;
+Attribute.validateValueType = validateValueType;
 export default Attribute;

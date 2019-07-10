@@ -110,9 +110,14 @@ describe("TodoItem from Model.new", () => {
           const item = new TestModel(); // Should throw
         }).toThrow();
       });
+      it("throws if default value doesn't match type", () => {
+        expect(() => {
+          TestModel = Model.new([
+            { name: "text", default: false, type: Model.type.string }
+          ]);
+        }).toThrow();
+      });
     });
-
-    it.todo("throws if default value doesn't match type");
   }); // "Using configured attributes array"
 
   describe("Using attributes array of strings (becoming untyped variables, defaulting to undefined)", () => {
