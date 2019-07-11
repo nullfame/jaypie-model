@@ -117,6 +117,24 @@ describe("TodoItem from Model.new", () => {
           ]);
         }).toThrow();
       });
+      it.skip("throws if setting an undecalred attribute in constructor", () => {
+        expect(() => {
+          TestModel = Model.new([
+            { name: "text", default: "todo", type: Model.type.string }
+          ]);
+          const item = new TestModel({ text: "Work on Jaypie", done: false });
+          item.done = true;
+        }).toThrow();
+      });
+      it.skip("throws if accessing an unset attribute", () => {
+        expect(() => {
+          TestModel = Model.new([
+            { name: "text", default: "todo", type: Model.type.string }
+          ]);
+          const item = new TestModel({ text: "Work on Jaypie" });
+          item.done = true;
+        }).toThrow();
+      });
     });
   }); // "Using configured attributes array"
 
