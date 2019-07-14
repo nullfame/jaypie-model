@@ -126,7 +126,7 @@ describe("TodoItem from Model.new", () => {
           item.done = true;
         }).toThrow();
       });
-      it.skip("throws if accessing an unset attribute", () => {
+      it("throws if accessing an unset attribute", () => {
         expect(() => {
           TestModel = Model.new([
             { name: "text", default: "todo", type: Model.type.string }
