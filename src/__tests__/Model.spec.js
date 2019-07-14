@@ -117,13 +117,13 @@ describe("TodoItem from Model.new", () => {
           ]);
         }).toThrow();
       });
-      it.skip("throws if setting an undecalred attribute in constructor", () => {
+      it.only("throws if setting an undecalred attribute in constructor", () => {
         expect(() => {
           TestModel = Model.new([
             { name: "text", default: "todo", type: Model.type.string }
           ]);
           const item = new TestModel({ text: "Work on Jaypie", done: false });
-          item.done = true;
+          expect(item.text).toEqual("Work on Jaypie");
         }).toThrow();
       });
       it("throws if accessing an unset attribute", () => {
