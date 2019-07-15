@@ -52,25 +52,15 @@ export default {
           attributeParams.value = attribute.default;
           delete attributeParams.default;
 
+          // If an initial value was passed, use it
+          if (attribute.name in initialValues) {
+            attributeParams.value = initialValues[attribute.name];
+          }
+
           // Create attribute as an object with getters/setters
           this.private.get(this)[attribute.name] = new Attribute(
             attributeParams
           );
-          Object.defineProperty(this, attribute.name, {
-            get() {
-              const atributeInternals = this.private.get(this)[attribute.name];
-              return atributeInternals.value;
-            },
-            set(x) {
-              const atributeInternals = this.private.get(this)[attribute.name];
-              atributeInternals.value = x;
-            }
-          });
-
-          // If an initial value was passed, use it
-          if (attribute.name in initialValues) {
-            this[attribute.name] = initialValues[attribute.name];
-          }
         }); // END foreach attribute
 
         // Proxy handler get method
