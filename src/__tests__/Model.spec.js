@@ -23,7 +23,7 @@ describe("TodoItem from Model.new", () => {
         expect(item.text).toEqual("My Item");
         expect(item.done).toEqual(true);
       });
-    });
+    }); // END "Without types" in "Using configured attributes array"
 
     describe("With types", () => {
       it("supports type any", () => {
@@ -93,7 +93,7 @@ describe("TodoItem from Model.new", () => {
           item.text = null;
         }).toThrow();
       });
-    });
+    }); // END "With types" in "Using configured attributes array"
 
     describe("Error cases with configured attributes array", () => {
       it("throws if attribute is missing a name", () => {
@@ -126,8 +126,8 @@ describe("TodoItem from Model.new", () => {
           item.done = true;
         }).toThrow();
       });
-    });
-  }); // "Using configured attributes array"
+    }); // END "Error cases with configured attributes array" in "Using configured attributes array"
+  }); // END "Using configured attributes array"
 
   describe("Using attributes array of strings (becoming untyped variables, defaulting to undefined)", () => {
     beforeEach(() => {
@@ -143,5 +143,5 @@ describe("TodoItem from Model.new", () => {
       expect(item.text).toEqual("My Item");
       expect(item.done).toEqual(false);
     });
-  });
-});
+  }); // END "Using attributes array of strings (becoming untyped variables, defaulting to undefined)"
+}); // END "TodoItem from Model.new"
