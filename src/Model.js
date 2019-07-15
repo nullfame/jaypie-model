@@ -90,7 +90,7 @@ export default {
             return true;
           }
           throw Error(
-            `Jaypie: Model.get: Not Implemented: Missing Attribute: ${property}`
+            `Jaypie: Model.set: Not Implemented: Missing Attribute: ${property}`
           );
         }; // END handler.set
         // Return as proxy
