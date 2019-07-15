@@ -144,4 +144,10 @@ describe("TodoItem from Model.new", () => {
       expect(item.done).toEqual(false);
     });
   }); // END "Using attributes array of strings (becoming untyped variables, defaulting to undefined)"
+
+  describe("Model proxy", () => {
+    it.todo("Shows gettable/settable private attributes as members");
+    it.todo("Doesn't show the private map");
+    it.todo("Pretty prints");
+  });
 }); // END "TodoItem from Model.new"
