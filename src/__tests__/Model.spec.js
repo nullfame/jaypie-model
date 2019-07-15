@@ -117,7 +117,6 @@ describe("TodoItem from Model.new", () => {
           ]);
         }).toThrow();
       });
-      it.todo("throws if setting an undecalred attribute in constructor");
       it("throws if accessing an unset attribute", () => {
         expect(() => {
           TestModel = Model.new([
