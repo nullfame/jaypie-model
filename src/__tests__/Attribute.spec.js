@@ -239,4 +239,7 @@ describe("Attribute class", () => {
       });
     });
   });
+  describe("Aesthetics", () => {
+    it.todo("Pretty prints");
+  });
 });
