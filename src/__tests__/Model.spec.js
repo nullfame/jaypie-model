@@ -148,6 +148,23 @@ describe("TodoItem from Model.new", () => {
   describe("Model proxy", () => {
     it.todo("Shows gettable/settable private attributes as members");
     it.todo("Doesn't show the private map");
-    it.todo("Pretty prints");
+    it.skip("Pretty prints the Model class", () => {
+      TestModel = Model.new([
+        { name: "text", type: Model.type.string },
+        { name: "done", type: Model.type.boolean, default: false }
+      ]);
+      console.log("TestModel :", TestModel);
+      // TODO: add test assertions
+    });
+    it.skip("Pretty prints the Model instance", () => {
+      TestModel = Model.new([
+        { name: "text", type: Model.type.string },
+        { name: "done", type: Model.type.boolean, default: false }
+      ]);
+
+      const item = new TestModel({ text: "Work on Jaypie" });
+      console.log("item :", item);
+      // TODO: add test assertions
+    });
   });
 }); // END "TodoItem from Model.new"
