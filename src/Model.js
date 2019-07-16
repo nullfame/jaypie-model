@@ -88,6 +88,9 @@ export default {
       } // END Model.new class constructor
     }; // END Model.new class
 
+    Model.toString = () => {
+      return "Jaypie.Model";
+    };
     return Model;
   }, // END Model.new
 
