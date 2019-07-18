@@ -240,6 +240,13 @@ describe("Attribute class", () => {
     });
   });
   describe("Aesthetics", () => {
-    it.todo("Pretty prints");
+    it.skip("Pretty prints", () => {
+      const attribute = new Attribute({
+        name: "text",
+        type: Attribute.type.string,
+        value: "Work on Jaypie"
+      });
+      console.log("attribute :", attribute);
+    });
   });
 });
