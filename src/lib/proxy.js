@@ -1,4 +1,4 @@
-const reflector = {
+const defaultReflector = {
   getPrototypeOf: target => Reflect.getPrototypeOf(target),
   setPrototypeOf: (target, prototype) =>
     Reflect.setPrototypeOf(target, prototype),
@@ -19,4 +19,4 @@ const reflector = {
   construct: (target, argumentsList, newTarget) =>
     Reflect.construct(target, argumentsList, newTarget)
 };
-export default reflector;
+export default (handler = {}) => Object.assign({}, defaultReflector, handler);

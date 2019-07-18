@@ -1,5 +1,5 @@
 import Attribute from "./Attribute";
-import handler from "./lib/proxy";
+import proxyHandler from "./lib/proxy";
 
 export default {
   /**
@@ -63,26 +63,28 @@ export default {
           );
         }); // END foreach attribute
 
-        // Proxy handler get method
-        handler.get = (model, property) => {
-          const internalAttribute = model.private.get(model)[property];
-          if (typeof internalAttribute === "object") {
-            return internalAttribute.value;
+        // Proxy handler methods
+        const handler = proxyHandler({
+          get: (model, property) => {
+            const internalAttribute = model.private.get(model)[property];
+            if (typeof internalAttribute === "object") {
+              return internalAttribute.value;
+            }
+            throw Error(
+              `Jaypie: Model.get: Not Implemented: Missing Attribute: ${property}`
+            );
+          },
+          set: (model, property, value) => {
+            const internalAttribute = model.private.get(model)[property];
+            if (typeof internalAttribute === "object") {
+              internalAttribute.value = value;
+              return true;
+            }
+            throw Error(
+              `Jaypie: Model.set: Not Implemented: Missing Attribute: ${property}`
+            );
           }
-          throw Error(
-            `Jaypie: Model.get: Not Implemented: Missing Attribute: ${property}`
-          );
-        }; // END handler.get
-        handler.set = (model, property, value) => {
-          const internalAttribute = model.private.get(model)[property];
-          if (typeof internalAttribute === "object") {
-            internalAttribute.value = value;
-            return true;
-          }
-          throw Error(
-            `Jaypie: Model.set: Not Implemented: Missing Attribute: ${property}`
-          );
-        }; // END handler.set
+        });
         // Return as proxy
         return new Proxy(this, handler);
       } // END Model.new class constructor
