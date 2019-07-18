@@ -110,10 +110,32 @@ describe("TodoItem from Model.new", () => {
           const item = new TestModel(); // Should throw
         }).toThrow();
       });
+      it("throws if default value doesn't match type", () => {
+        expect(() => {
+          TestModel = Model.new([
+            { name: "text", default: false, type: Model.type.string }
+          ]);
+        }).toThrow();
+      });
+      it.skip("throws if setting an undecalred attribute in constructor", () => {
+        expect(() => {
+          TestModel = Model.new([
+            { name: "text", default: "todo", type: Model.type.string }
+          ]);
+          const item = new TestModel({ text: "Work on Jaypie", done: false });
+          item.done = true;
+        }).toThrow();
+      });
+      it.skip("throws if accessing an unset attribute", () => {
+        expect(() => {
+          TestModel = Model.new([
+            { name: "text", default: "todo", type: Model.type.string }
+          ]);
+          const item = new TestModel({ text: "Work on Jaypie" });
+          item.done = true;
+        }).toThrow();
+      });
     });
-
-    it.todo("throws if default value doesn't match type");
-    it.todo("throws if setting values don't match type");
   }); // "Using configured attributes array"
 
   describe("Using attributes array of strings (becoming untyped variables, defaulting to undefined)", () => {
