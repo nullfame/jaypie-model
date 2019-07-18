@@ -1,4 +1,5 @@
 import ow from "ow";
+import proxyHandler from "./lib/proxy";
 
 const attributeType = {
   any: "ANY",
@@ -50,36 +51,28 @@ class Attribute {
     this.private.get(this).type = type;
     this.private.get(this).value = value;
 
-    // Allow read-only access to name
-    Object.defineProperty(this, "name", {
-      get() {
-        return this.private.get(this).name;
+    // Define read-only private fields
+    const readonly = ["name", "type"];
+
+    // Proxy handler methods
+    const handler = proxyHandler({
+      get: (target, property) => {
+        return target.private.get(target)[property];
       },
-      set() {
-        throw Error(
-          "Jaypie: Attribute: Unsupported Operation: Cannot assign to read-only property: name"
-        );
+      set: (target, property, newValue) => {
+        if (readonly.indexOf(property) > -1) {
+          throw Error(
+            `Jaypie: Attribute: Unsupported Operation: Cannot assign to read-only property: ${property}`
+          );
+        }
+        const internals = target.private.get(target);
+        validateValueType(newValue, internals.type);
+        internals.value = newValue;
+        return true;
       }
     });
-    Object.defineProperty(this, "type", {
-      get() {
-        return this.private.get(this).type;
-      },
-      set() {
-        throw Error(
-          "Jaypie: Attribute: Unsupported Operation: Cannot assign to read-only property: type"
-        );
-      }
-    });
-    Object.defineProperty(this, "value", {
-      get() {
-        return this.private.get(this).value;
-      },
-      set(newValue) {
-        validateValueType(newValue, this.type);
-        this.private.get(this).value = newValue;
-      }
-    });
+    // Return as proxy
+    return new Proxy(this, handler);
   }
 }
 Attribute.type = attributeType;
