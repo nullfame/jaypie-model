@@ -240,13 +240,17 @@ describe("Attribute class", () => {
     });
   });
   describe("Aesthetics", () => {
+    const attribute = new Attribute({
+      name: "text",
+      type: Attribute.type.string,
+      value: "Work on Jaypie"
+    });
     it.skip("Pretty prints", () => {
-      const attribute = new Attribute({
-        name: "text",
-        type: Attribute.type.string,
-        value: "Work on Jaypie"
-      });
       console.log("attribute :", attribute);
+    });
+    it("Allows you to iterate keys", () => {
+      const keys = Object.keys(attribute);
+      expect(keys).toEqual(["name", "type", "value"]);
     });
   });
 });

@@ -59,6 +59,15 @@ class Attribute {
       get: (target, property) => {
         return target.private.get(target)[property];
       },
+      getOwnPropertyDescriptor: (target, property) => {
+        return Object.getOwnPropertyDescriptor(
+          target.private.get(target),
+          property
+        );
+      },
+      ownKeys: target => {
+        return Object.keys(target.private.get(target));
+      },
       set: (target, property, newValue) => {
         if (readonly.indexOf(property) > -1) {
           throw Error(
