@@ -249,6 +249,12 @@ describe("Attribute class", () => {
       // eslint-disable-next-line no-console
       console.log("attribute :", attribute);
     });
+    it("Converts to a string", () => {
+      expect(attribute.toString()).not.toEqual("[object Object]");
+      expect(attribute.toString()).toEqual(
+        `Attribute: (STRING) text="Work on Jaypie"`
+      );
+    });
     it("Allows you to iterate keys", () => {
       const keys = Object.keys(attribute);
       expect(keys).toEqual(["name", "type", "value"]);

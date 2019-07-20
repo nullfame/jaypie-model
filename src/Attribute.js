@@ -83,6 +83,10 @@ class Attribute {
     // Return as proxy
     return new Proxy(this, handler);
   }
+
+  toString() {
+    return `Attribute: (${this.type}) ${this.name}="${this.value}"`;
+  }
 }
 Attribute.type = attributeType;
 Attribute.validateValueType = validateValueType;
