@@ -245,7 +245,7 @@ describe("Attribute class", () => {
       type: Attribute.type.string,
       value: "Work on Jaypie"
     });
-    it("Pretty prints", () => {
+    it.skip("Pretty prints", () => {
       // eslint-disable-next-line no-console
       console.log("attribute :", attribute);
     });
