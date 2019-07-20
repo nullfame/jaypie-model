@@ -84,9 +84,12 @@ class Attribute {
           );
         }
         const internals = target.private.get(target);
-        validateValueType(newValue, internals.type);
-        internals.value = newValue;
-        return true;
+        if (property === "value") {
+          validateValueType(newValue, internals.type);
+          internals.value = newValue;
+          return true;
+        }
+        return false;
       }
     });
     // Return as proxy
