@@ -57,13 +57,22 @@ class Attribute {
     // Proxy handler methods
     const handler = proxyHandler({
       get: (target, property) => {
-        return target.private.get(target)[property];
+        const internal = target.private.get(target);
+        // If this is a private variable, return it
+        if (Object.keys(internal).indexOf(property) > -1) {
+          return internal[property];
+        }
+        // ...otherwise defer to the top-level properties
+        return Reflect.get(target, property);
       },
       getOwnPropertyDescriptor: (target, property) => {
-        return Object.getOwnPropertyDescriptor(
-          target.private.get(target),
-          property
-        );
+        const internal = target.private.get(target);
+        // If this is a private variable, return it
+        if (Object.keys(internal).indexOf(property) > -1) {
+          return Object.getOwnPropertyDescriptor(internal, property);
+        }
+        // ...otherwise defer to the top-level properties
+        return Reflect.getOwnPropertyDescriptor(target, property);
       },
       ownKeys: target => {
         return Object.keys(target.private.get(target));
