@@ -145,9 +145,10 @@ describe("TodoItem from Model.new", () => {
     });
   }); // END "Using attributes array of strings (becoming untyped variables, defaulting to undefined)"
 
-  describe("Model proxy", () => {
+  describe("Aesthetics", () => {
     it.todo("Shows gettable/settable private attributes as members");
     it.todo("Doesn't show the private map");
+    it.todo("Converts to a string");
     it.skip("Pretty prints the Model class", () => {
       TestModel = Model.new([
         { name: "text", type: Model.type.string },
