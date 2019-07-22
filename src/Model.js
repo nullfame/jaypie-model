@@ -1,7 +1,7 @@
 import Attribute from "./Attribute";
 import proxyHandler from "./lib/proxy";
 
-const RESERVED_ATTRIBUTE_NAMES = ["inspect"];
+const RESERVED_ATTRIBUTE_NAMES = ["inspect", "private"];
 
 export default {
   /**
