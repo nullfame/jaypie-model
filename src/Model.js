@@ -106,7 +106,13 @@ export default {
             const internal = model.private.get(model);
             // If this is a private variable, return it
             if (Object.keys(internal).indexOf(property) > -1) {
-              return Object.getOwnPropertyDescriptor(internal, property);
+              // But first modify the value attribute
+              const propertyDescriptor = Object.getOwnPropertyDescriptor(
+                internal,
+                property
+              );
+              propertyDescriptor.value = internal[property].value;
+              return propertyDescriptor;
             }
             // ...otherwise defer to the top-level properties
             return Reflect.getOwnPropertyDescriptor(model, property);

@@ -167,13 +167,24 @@ describe("TodoItem from Model.new", () => {
       const keys = Object.keys(item);
       expect(keys).toEqual(["text", "done"]);
     });
+
+    it("Returns attribute values in property descriptors", () => {
+      const keys = Object.keys(item);
+      expect(keys).toEqual(["text", "done"]);
+      const textPropertyDescriptor = Object.getOwnPropertyDescriptor(
+        item,
+        "text"
+      );
+      expect(textPropertyDescriptor.value).toEqual("Work on Jaypie");
+      const donePropertyDescriptor = Object.getOwnPropertyDescriptor(
+        item,
+        "done"
+      );
+      expect(donePropertyDescriptor.value).toEqual(false);
+    });
     it.todo("Converts to a string");
     it.skip("Pretty prints the Model class", () => {
       console.log("TestModel :", TestModel);
-      // TODO: add test assertions
-    });
-    it.skip("Pretty prints the Model instance", () => {
-      console.log("item :", item);
       // TODO: add test assertions
     });
   });
