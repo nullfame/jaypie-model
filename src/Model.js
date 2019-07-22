@@ -102,6 +102,18 @@ export default {
 
             return Reflect.get(model, property);
           },
+          getOwnPropertyDescriptor: (model, property) => {
+            const internal = model.private.get(model);
+            // If this is a private variable, return it
+            if (Object.keys(internal).indexOf(property) > -1) {
+              return Object.getOwnPropertyDescriptor(internal, property);
+            }
+            // ...otherwise defer to the top-level properties
+            return Reflect.getOwnPropertyDescriptor(model, property);
+          },
+          ownKeys: model => {
+            return Object.keys(model.private.get(model));
+          },
           set: (model, property, value) => {
             const internalAttribute = model.private.get(model)[property];
             if (typeof internalAttribute === "object") {

@@ -163,8 +163,10 @@ describe("TodoItem from Model.new", () => {
     ]);
     const item = new TestModel({ text: "Work on Jaypie" });
 
-    it.todo("Shows gettable/settable private attributes as members");
-    it.todo("Doesn't show the private map");
+    it("Shows gettable/settable private attributes as members", () => {
+      const keys = Object.keys(item);
+      expect(keys).toEqual(["text", "done"]);
+    });
     it.todo("Converts to a string");
     it.skip("Pretty prints the Model class", () => {
       console.log("TestModel :", TestModel);
