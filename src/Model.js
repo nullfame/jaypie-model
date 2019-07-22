@@ -15,6 +15,23 @@ export default {
         if (attribute.type !== undefined && attribute.default !== undefined) {
           Attribute.validateValueType(attribute.default, attribute.type);
         }
+
+        // Check attribute name is valid
+        if (RESERVED_ATTRIBUTE_NAMES.indexOf(attribute.name) > -1) {
+          throw Error(
+            `Jaypie: Model.new: Invalid Configuration: Invalid Attribute Name: ${
+              attribute.name
+            }`
+          );
+        }
+      }
+      if (typeof attribute === "string") {
+        // Check attribute name is valid
+        if (RESERVED_ATTRIBUTE_NAMES.indexOf(attribute) > -1) {
+          throw Error(
+            `Jaypie: Model.new: Invalid Configuration: Invalid Attribute Name: ${attribute}`
+          );
+        }
       }
     });
 

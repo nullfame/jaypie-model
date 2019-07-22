@@ -126,6 +126,11 @@ describe("TodoItem from Model.new", () => {
           item.done = true;
         }).toThrow();
       });
+      it("throws if using a reserved attribute name", () => {
+        expect(() => {
+          TestModel = Model.new([{ name: "inspect" }]);
+        }).toThrow();
+      });
     }); // END "Error cases with configured attributes array" in "Using configured attributes array"
   }); // END "Using configured attributes array"
 
@@ -142,6 +147,12 @@ describe("TodoItem from Model.new", () => {
       const item = new TestModel({ text: "My Item", done: false });
       expect(item.text).toEqual("My Item");
       expect(item.done).toEqual(false);
+    });
+
+    it("throws if using a reserved attribute name", () => {
+      expect(() => {
+        TestModel = Model.new(["text", "done", "inspect"]);
+      }).toThrow();
     });
   }); // END "Using attributes array of strings (becoming untyped variables, defaulting to undefined)"
 
