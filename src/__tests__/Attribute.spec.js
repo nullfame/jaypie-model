@@ -245,10 +245,6 @@ describe("Attribute class", () => {
       type: Attribute.type.string,
       value: "Work on Jaypie"
     });
-    it.skip("Pretty prints", () => {
-      // eslint-disable-next-line no-console
-      console.log("attribute :", attribute);
-    });
     it("Converts to a string", () => {
       expect(attribute.toString()).not.toEqual("[object Object]");
       expect(attribute.toString()).toEqual(
