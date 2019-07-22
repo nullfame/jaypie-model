@@ -182,7 +182,11 @@ describe("TodoItem from Model.new", () => {
       );
       expect(donePropertyDescriptor.value).toEqual(false);
     });
-    it.todo("Converts to a string");
+    it.only("Converts to a string", () => {
+      const itemString = item.toString();
+      expect(itemString).not.toEqual("[object Object]");
+      expect(itemString).not.toEqual("[Model Object]");
+    });
     it.skip("Pretty prints the Model class", () => {
       console.log("TestModel :", TestModel);
       // TODO: add test assertions

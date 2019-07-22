@@ -134,6 +134,18 @@ export default {
         // Return as proxy
         return new Proxy(this, handler);
       } // END Model.new class constructor
+
+      toString() {
+        const keys = Object.keys(this);
+        const internal = this.private.get(this);
+        console.log("internal :", internal);
+        console.log("keys :", keys);
+        const returnString = keys.reduce((accumulator, current) => {
+          return accumulator + this[current];
+        }, "Model : ");
+        console.log("returnString :", returnString);
+        return "[Model Object]";
+      }
     }; // END Model.new class
 
     Model.toString = () => {
