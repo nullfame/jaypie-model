@@ -1,6 +1,8 @@
 import Attribute from "./Attribute";
 import proxyHandler from "./lib/proxy";
 
+const RESERVED_ATTRIBUTE_NAMES = ["inspect"];
+
 export default {
   /**
    * Create a new model
@@ -66,13 +68,22 @@ export default {
         // Proxy handler methods
         const handler = proxyHandler({
           get: (model, property) => {
+            // Try returning the attribute value
             const internalAttribute = model.private.get(model)[property];
             if (typeof internalAttribute === "object") {
               return internalAttribute.value;
             }
-            throw Error(
-              `Jaypie: Model.get: Not Implemented: Missing Attribute: ${property}`
-            );
+
+            // Throw an error if this is an unset attribute
+            if (typeof property === "string" && !(property in model)) {
+              if (RESERVED_ATTRIBUTE_NAMES.indexOf(property) === -1) {
+                throw Error(
+                  `Jaypie: Model.get: Not Implemented: Missing Attribute: ${property}`
+                );
+              }
+            }
+
+            return Reflect.get(model, property);
           },
           set: (model, property, value) => {
             const internalAttribute = model.private.get(model)[property];
