@@ -8,7 +8,7 @@ JSON:API Gateway for AWS Lambda in Node.js
 * Model-Controller pattern for implementing JSON:APIs (for the view)
 * Opinionated REST vocabulary
 * Proper use of HTTP status codes
-* Graceful developer experience with aesthetics inspired by Vue and Laravel
+* Aesthetic syntax inspired by Vue and Laravel.  Not "fluent" per se but a natural programming interface focusing on a graceful developer experience
 
 ## INB4 "Yet Another Framework"
 
