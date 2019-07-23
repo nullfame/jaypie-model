@@ -1,4 +1,7 @@
 import Attribute from "./Attribute";
+import proxyHandler from "./lib/proxy";
+
+const RESERVED_ATTRIBUTE_NAMES = ["inspect", "private"];
 
 export default {
   /**
@@ -11,6 +14,23 @@ export default {
       if (typeof attribute === "object") {
         if (attribute.type !== undefined && attribute.default !== undefined) {
           Attribute.validateValueType(attribute.default, attribute.type);
+        }
+
+        // Check attribute name is valid
+        if (RESERVED_ATTRIBUTE_NAMES.indexOf(attribute.name) > -1) {
+          throw Error(
+            `Jaypie: Model.new: Invalid Configuration: Invalid Attribute Name: ${
+              attribute.name
+            }`
+          );
+        }
+      }
+      if (typeof attribute === "string") {
+        // Check attribute name is valid
+        if (RESERVED_ATTRIBUTE_NAMES.indexOf(attribute) > -1) {
+          throw Error(
+            `Jaypie: Model.new: Invalid Configuration: Invalid Attribute Name: ${attribute}`
+          );
         }
       }
     });
@@ -51,29 +71,82 @@ export default {
           attributeParams.value = attribute.default;
           delete attributeParams.default;
 
+          // If an initial value was passed, use it
+          if (attribute.name in initialValues) {
+            attributeParams.value = initialValues[attribute.name];
+          }
+
           // Create attribute as an object with getters/setters
           this.private.get(this)[attribute.name] = new Attribute(
             attributeParams
           );
-          Object.defineProperty(this, attribute.name, {
-            get() {
-              const atributeInternals = this.private.get(this)[attribute.name];
-              return atributeInternals.value;
-            },
-            set(x) {
-              const atributeInternals = this.private.get(this)[attribute.name];
-              atributeInternals.value = x;
-            }
-          });
-
-          // If an initial value was passed, use it
-          if (attribute.name in initialValues) {
-            this[attribute.name] = initialValues[attribute.name];
-          }
         }); // END foreach attribute
+
+        // Proxy handler methods
+        const handler = proxyHandler({
+          get: (model, property) => {
+            // Try returning the attribute value
+            const internalAttribute = model.private.get(model)[property];
+            if (typeof internalAttribute === "object") {
+              return internalAttribute.value;
+            }
+
+            // Throw an error if this is an unset attribute
+            if (typeof property === "string" && !(property in model)) {
+              if (RESERVED_ATTRIBUTE_NAMES.indexOf(property) === -1) {
+                throw Error(
+                  `Jaypie: Model.get: Not Implemented: Missing Attribute: ${property}`
+                );
+              }
+            }
+
+            return Reflect.get(model, property);
+          },
+          getOwnPropertyDescriptor: (model, property) => {
+            const internal = model.private.get(model);
+            // If this is a private variable, return it
+            if (Object.keys(internal).indexOf(property) > -1) {
+              // But first modify the value attribute
+              const propertyDescriptor = Object.getOwnPropertyDescriptor(
+                internal,
+                property
+              );
+              propertyDescriptor.value = internal[property].value;
+              return propertyDescriptor;
+            }
+            // ...otherwise defer to the top-level properties
+            return Reflect.getOwnPropertyDescriptor(model, property);
+          },
+          ownKeys: model => {
+            return Object.keys(model.private.get(model));
+          },
+          set: (model, property, value) => {
+            const internalAttribute = model.private.get(model)[property];
+            if (typeof internalAttribute === "object") {
+              internalAttribute.value = value;
+              return true;
+            }
+            throw Error(
+              `Jaypie: Model.set: Not Implemented: Missing Attribute: ${property}`
+            );
+          }
+        });
+        // Return as proxy
+        return new Proxy(this, handler);
       } // END Model.new class constructor
+
+      toString() {
+        const keys = Object.keys(this);
+        const returnString = `${keys.reduce((accumulator, key) => {
+          return `${accumulator} ${key}="${this[key]}"`;
+        }, "[Model:")}]`;
+        return returnString;
+      }
     }; // END Model.new class
 
+    Model.toString = () => {
+      return "[Jaypie Model]";
+    };
     return Model;
   }, // END Model.new
 

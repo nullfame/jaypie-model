@@ -1,4 +1,5 @@
 import ow from "ow";
+import proxyHandler from "./lib/proxy";
 
 const attributeType = {
   any: "ANY",
@@ -50,36 +51,53 @@ class Attribute {
     this.private.get(this).type = type;
     this.private.get(this).value = value;
 
-    // Allow read-only access to name
-    Object.defineProperty(this, "name", {
-      get() {
-        return this.private.get(this).name;
+    // Define read-only private fields
+    const readonly = ["name", "type"];
+
+    // Proxy handler methods
+    const handler = proxyHandler({
+      get: (target, property) => {
+        const internal = target.private.get(target);
+        // If this is a private variable, return it
+        if (Object.keys(internal).indexOf(property) > -1) {
+          return internal[property];
+        }
+        // ...otherwise defer to the top-level properties
+        return Reflect.get(target, property);
       },
-      set() {
-        throw Error(
-          "Jaypie: Attribute: Unsupported Operation: Cannot assign to read-only property: name"
-        );
+      getOwnPropertyDescriptor: (target, property) => {
+        const internal = target.private.get(target);
+        // If this is a private variable, return it
+        if (Object.keys(internal).indexOf(property) > -1) {
+          return Object.getOwnPropertyDescriptor(internal, property);
+        }
+        // ...otherwise defer to the top-level properties
+        return Reflect.getOwnPropertyDescriptor(target, property);
+      },
+      ownKeys: target => {
+        return Object.keys(target.private.get(target));
+      },
+      set: (target, property, newValue) => {
+        if (readonly.indexOf(property) > -1) {
+          throw Error(
+            `Jaypie: Attribute: Unsupported Operation: Cannot assign to read-only property: ${property}`
+          );
+        }
+        const internals = target.private.get(target);
+        if (property === "value") {
+          validateValueType(newValue, internals.type);
+          internals.value = newValue;
+          return true;
+        }
+        return false;
       }
     });
-    Object.defineProperty(this, "type", {
-      get() {
-        return this.private.get(this).type;
-      },
-      set() {
-        throw Error(
-          "Jaypie: Attribute: Unsupported Operation: Cannot assign to read-only property: type"
-        );
-      }
-    });
-    Object.defineProperty(this, "value", {
-      get() {
-        return this.private.get(this).value;
-      },
-      set(newValue) {
-        validateValueType(newValue, this.type);
-        this.private.get(this).value = newValue;
-      }
-    });
+    // Return as proxy
+    return new Proxy(this, handler);
+  }
+
+  toString() {
+    return `Attribute: (${this.type}) ${this.name}="${this.value}"`;
   }
 }
 Attribute.type = attributeType;

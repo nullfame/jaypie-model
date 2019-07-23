@@ -23,7 +23,7 @@ describe("TodoItem from Model.new", () => {
         expect(item.text).toEqual("My Item");
         expect(item.done).toEqual(true);
       });
-    });
+    }); // END "Without types" in "Using configured attributes array"
 
     describe("With types", () => {
       it("supports type any", () => {
@@ -93,7 +93,7 @@ describe("TodoItem from Model.new", () => {
           item.text = null;
         }).toThrow();
       });
-    });
+    }); // END "With types" in "Using configured attributes array"
 
     describe("Error cases with configured attributes array", () => {
       it("throws if attribute is missing a name", () => {
@@ -117,16 +117,7 @@ describe("TodoItem from Model.new", () => {
           ]);
         }).toThrow();
       });
-      it.skip("throws if setting an undecalred attribute in constructor", () => {
-        expect(() => {
-          TestModel = Model.new([
-            { name: "text", default: "todo", type: Model.type.string }
-          ]);
-          const item = new TestModel({ text: "Work on Jaypie", done: false });
-          item.done = true;
-        }).toThrow();
-      });
-      it.skip("throws if accessing an unset attribute", () => {
+      it("throws if accessing an unset attribute", () => {
         expect(() => {
           TestModel = Model.new([
             { name: "text", default: "todo", type: Model.type.string }
@@ -135,8 +126,13 @@ describe("TodoItem from Model.new", () => {
           item.done = true;
         }).toThrow();
       });
-    });
-  }); // "Using configured attributes array"
+      it("throws if using a reserved attribute name", () => {
+        expect(() => {
+          TestModel = Model.new([{ name: "inspect" }]);
+        }).toThrow();
+      });
+    }); // END "Error cases with configured attributes array" in "Using configured attributes array"
+  }); // END "Using configured attributes array"
 
   describe("Using attributes array of strings (becoming untyped variables, defaulting to undefined)", () => {
     beforeEach(() => {
@@ -152,5 +148,49 @@ describe("TodoItem from Model.new", () => {
       expect(item.text).toEqual("My Item");
       expect(item.done).toEqual(false);
     });
+
+    it("throws if using a reserved attribute name", () => {
+      expect(() => {
+        TestModel = Model.new(["text", "done", "inspect"]);
+      }).toThrow();
+    });
+  }); // END "Using attributes array of strings (becoming untyped variables, defaulting to undefined)"
+
+  describe("Aesthetics", () => {
+    TestModel = Model.new([
+      { name: "text", type: Model.type.string },
+      { name: "done", type: Model.type.boolean, default: false }
+    ]);
+    const item = new TestModel({ text: "Work on Jaypie" });
+
+    it("Shows gettable/settable private attributes as members", () => {
+      const keys = Object.keys(item);
+      expect(keys).toEqual(["text", "done"]);
+    });
+
+    it("Returns attribute values in property descriptors", () => {
+      const keys = Object.keys(item);
+      expect(keys).toEqual(["text", "done"]);
+      const textPropertyDescriptor = Object.getOwnPropertyDescriptor(
+        item,
+        "text"
+      );
+      expect(textPropertyDescriptor.value).toEqual("Work on Jaypie");
+      const donePropertyDescriptor = Object.getOwnPropertyDescriptor(
+        item,
+        "done"
+      );
+      expect(donePropertyDescriptor.value).toEqual(false);
+    });
+    it("Converts instances to a string", () => {
+      const itemString = item.toString();
+      expect(itemString).not.toEqual("[object Object]");
+      expect(itemString).toEqual(`[Model: text="Work on Jaypie" done="false"]`);
+    });
+    it("Converts the Model class to a string", () => {
+      const modelString = TestModel.toString();
+      expect(modelString).toEqual(`[Jaypie Model]`);
+      // expect(modelString).toEqual([Model: text=${Model.type.string} done=${Model.type.boolean}]`);
+    });
   });
-});
+}); // END "TodoItem from Model.new"
