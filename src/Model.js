@@ -137,14 +137,10 @@ export default {
 
       toString() {
         const keys = Object.keys(this);
-        const internal = this.private.get(this);
-        console.log("internal :", internal);
-        console.log("keys :", keys);
-        const returnString = keys.reduce((accumulator, current) => {
-          return accumulator + this[current];
-        }, "Model : ");
-        console.log("returnString :", returnString);
-        return "[Model Object]";
+        const returnString = `${keys.reduce((accumulator, key) => {
+          return `${accumulator} ${key}="${this[key]}"`;
+        }, "[Model:")}]`;
+        return returnString;
       }
     }; // END Model.new class
 
