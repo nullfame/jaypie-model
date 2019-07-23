@@ -187,10 +187,10 @@ describe("TodoItem from Model.new", () => {
       expect(itemString).not.toEqual("[object Object]");
       expect(itemString).toEqual(`[Model: text="Work on Jaypie" done="false"]`);
     });
-    it.todo("Converts the Model class to a string");
-    it.skip("Pretty prints the Model class", () => {
-      console.log("TestModel :", TestModel);
-      // TODO: add test assertions
+    it("Converts the Model class to a string", () => {
+      const modelString = TestModel.toString();
+      expect(modelString).toEqual(`[Jaypie Model]`);
+      // expect(modelString).toEqual([Model: text=${Model.type.string} done=${Model.type.boolean}]`);
     });
   });
 }); // END "TodoItem from Model.new"
