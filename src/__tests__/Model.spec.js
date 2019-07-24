@@ -189,7 +189,7 @@ describe("TodoItem from Model.new", () => {
     });
     it("Converts the Model class to a string", () => {
       const modelString = TestModel.toString();
-      expect(modelString).toEqual(`[Jaypie Model]`);
+      expect(modelString).toEqual(`[Class: Model]`);
       // expect(modelString).toEqual([Model: text=${Model.type.string} done=${Model.type.boolean}]`);
     });
   });

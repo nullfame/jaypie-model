@@ -145,7 +145,7 @@ export default {
     }; // END Model.new class
 
     Model.toString = () => {
-      return "[Jaypie Model]";
+      return "[Class: Model]";
     };
     return Model;
   }, // END Model.new
