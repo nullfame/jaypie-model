@@ -12,7 +12,7 @@ const silent = level === levels.silent;
 
 const dev = process.env.LOG_PRETTY_PRINT === "true";
 
-export default new log.LambdaLog(
+const logger = new log.LambdaLog(
   { debug, dev, silent },
   {
     fatal: "error",
@@ -22,3 +22,12 @@ export default new log.LambdaLog(
     }
   }
 );
+
+export default {
+  fatal: message => logger.fatal(message),
+  error: message => logger.error(message),
+  warn: message => logger.warn(message),
+  info: message => logger.info(message),
+  debug: message => logger.info(message),
+  trace: message => logger.info(message)
+};
