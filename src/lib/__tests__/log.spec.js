@@ -1,12 +1,46 @@
 import log from "../log";
 
 describe("Log Library", () => {
-  it("Supports different log levels", () => {
-    log.trace("Trace");
-    log.debug("Debug");
-    log.info("Info");
-    log.warn("Warn");
-    log.error("Error");
-    log.fatal("Fatal");
+  it("Supports trace log level", () => {
+    const spy = jest.spyOn(console, "info").mockImplementation();
+    log.trace("trace");
+    // eslint-disable-next-line no-console
+    expect(console.info).toBeCalled();
+    spy.mockRestore();
+  });
+  it("Supports debug log level", () => {
+    const spy = jest.spyOn(console, "info").mockImplementation();
+    log.debug("debug");
+    // eslint-disable-next-line no-console
+    expect(console.info).toBeCalled();
+    spy.mockRestore();
+  });
+  it("Supports info log level", () => {
+    const spy = jest.spyOn(console, "info").mockImplementation();
+    log.info("info");
+    // eslint-disable-next-line no-console
+    expect(console.info).toBeCalled();
+    spy.mockRestore();
+  });
+  it("Supports warn log level", () => {
+    const spy = jest.spyOn(console, "warn").mockImplementation();
+    log.warn("warn");
+    // eslint-disable-next-line no-console
+    expect(console.warn).toBeCalled();
+    spy.mockRestore();
+  });
+  it("Supports error log level", () => {
+    const spy = jest.spyOn(console, "error").mockImplementation();
+    log.error("error");
+    // eslint-disable-next-line no-console
+    expect(console.error).toBeCalled();
+    spy.mockRestore();
+  });
+  it("Supports fatal log level", () => {
+    const spy = jest.spyOn(console, "error").mockImplementation();
+    log.fatal("fatal");
+    // eslint-disable-next-line no-console
+    expect(console.error).toBeCalled();
+    spy.mockRestore();
   });
 });
