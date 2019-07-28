@@ -36,6 +36,7 @@
     "rimraf": "^2.6.3"
   },
   "dependencies": {
+    "lambda-log": "^2.3.0",
     "ow": "^0.13.2"
   },
   "husky": {
