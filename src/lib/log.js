@@ -29,5 +29,10 @@ export default {
   warn: message => logger.warn(message),
   info: message => logger.info(message),
   debug: message => logger.info(message),
-  trace: message => logger.info(message)
+  trace: message => logger.info(message),
+
+  status: (infoMessage, debugMessage) => {
+    logger.info(infoMessage);
+    logger.debug(debugMessage);
+  }
 };

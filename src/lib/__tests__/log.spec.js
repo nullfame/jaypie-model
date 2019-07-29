@@ -43,4 +43,15 @@ describe("Log Library", () => {
     expect(console.error).toBeCalled();
     spy.mockRestore();
   });
+  it("Supports status logging", () => {
+    const spyConsoleInfo = jest.spyOn(console, "info").mockImplementation();
+    const spyConsoleLog = jest.spyOn(console, "log").mockImplementation();
+    log.status("info", "debug");
+    // eslint-disable-next-line no-console
+    expect(console.info).toHaveBeenCalled();
+    // eslint-disable-next-line no-console
+    expect(console.log).toHaveBeenCalled();
+    spyConsoleInfo.mockRestore();
+    spyConsoleLog.mockRestore();
+  });
 });
