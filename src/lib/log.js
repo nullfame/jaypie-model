@@ -31,6 +31,11 @@ export default {
   debug: message => logger.info(message),
   trace: message => logger.info(message),
 
+  /**
+   * Logs an info and debug message, subject to level settings
+   * @param {any} infoMessage - message to log on info or lower level
+   * @param {any} debugMessage - message to log in addition to info message, on debug or lower level
+   */
   status: (infoMessage, debugMessage) => {
     logger.info(infoMessage);
     logger.debug(debugMessage);
