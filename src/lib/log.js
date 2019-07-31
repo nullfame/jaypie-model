@@ -55,5 +55,13 @@ export default {
   /**
    * Allowed log levels
    */
-  level: levels
+  level: levels,
+
+  /**
+   * Update current log level
+   */
+  // eslint-disable-next-line no-unused-vars
+  set: newLevel => {
+    //
+  }
 };
