@@ -1,6 +1,17 @@
 import log from "lambda-log";
 
-const levels = { all: 0, trace: 1, debug: 2, info: 3, none: 99, silent: 99 };
+const levels = {
+  all: 0,
+  trace: 1,
+  debug: 2,
+  info: 3,
+  warn: 4,
+  error: 5,
+  fatal: 6,
+  none: 99,
+  silent: 99
+};
+
 const level =
   Object.keys(levels).indexOf(process.env.LOG_LEVEL) > -1
     ? levels[process.env.LOG_LEVEL]
@@ -39,5 +50,10 @@ export default {
   status: (infoMessage, debugMessage) => {
     logger.info(infoMessage);
     logger.debug(debugMessage);
-  }
+  },
+
+  /**
+   * Allowed log levels
+   */
+  level: levels
 };
