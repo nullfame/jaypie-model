@@ -17,7 +17,6 @@ const level =
     ? levels[process.env.LOG_LEVEL]
     : levels.info;
 
-const trace = levels.trace >= level;
 const debug = levels.debug >= level;
 const silent = level === levels.silent;
 
@@ -26,11 +25,7 @@ const dev = process.env.LOG_PRETTY_PRINT === "true";
 const logger = new log.LambdaLog(
   { debug, dev, silent },
   {
-    fatal: "error",
-    trace: () => {
-      if (trace) return "info";
-      return false;
-    }
+    fatal: "error"
   }
 );
 
@@ -39,8 +34,8 @@ export default {
   error: message => logger.error(message),
   warn: message => logger.warn(message),
   info: message => logger.info(message),
-  debug: message => logger.info(message),
-  trace: message => logger.info(message),
+  debug: message => logger.debug(message),
+  trace: message => logger.debug(message),
 
   /**
    * Logs an info and debug message, subject to level settings

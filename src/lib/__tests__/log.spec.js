@@ -2,17 +2,17 @@ import log from "../log";
 
 describe("Log Library", () => {
   it("Supports trace log level", () => {
-    const spy = jest.spyOn(console, "info").mockImplementation();
+    const spy = jest.spyOn(console, "log").mockImplementation();
     log.trace("trace");
     // eslint-disable-next-line no-console
-    expect(console.info).toBeCalled();
+    expect(console.log).toBeCalled();
     spy.mockRestore();
   });
   it("Supports debug log level", () => {
-    const spy = jest.spyOn(console, "info").mockImplementation();
+    const spy = jest.spyOn(console, "log").mockImplementation();
     log.debug("debug");
     // eslint-disable-next-line no-console
-    expect(console.info).toBeCalled();
+    expect(console.log).toBeCalled();
     spy.mockRestore();
   });
   it("Supports info log level", () => {
