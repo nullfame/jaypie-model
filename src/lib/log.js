@@ -12,7 +12,7 @@ const levels = {
   silent: 99
 };
 
-const level =
+let level =
   Object.keys(levels).indexOf(process.env.LOG_LEVEL) > -1
     ? levels[process.env.LOG_LEVEL]
     : levels.info;
@@ -29,13 +29,29 @@ const logger = new log.LambdaLog(
   }
 );
 
+function logLevel(testLevel) {
+  return level <= testLevel;
+}
+
 export default {
-  fatal: message => logger.fatal(message),
-  error: message => logger.error(message),
-  warn: message => logger.warn(message),
-  info: message => logger.info(message),
-  debug: message => logger.debug(message),
-  trace: message => logger.debug(message),
+  fatal: message => {
+    if (logLevel(levels.fatal)) logger.fatal(message);
+  },
+  error: message => {
+    if (logLevel(levels.error)) logger.error(message);
+  },
+  warn: message => {
+    if (logLevel(levels.warn)) logger.warn(message);
+  },
+  info: message => {
+    if (logLevel(levels.info)) logger.info(message);
+  },
+  debug: message => {
+    if (logLevel(levels.debug)) logger.debug(message);
+  },
+  trace: message => {
+    if (logLevel(levels.debug)) logger.debug(message);
+  },
 
   /**
    * Logs an info and debug message, subject to level settings
@@ -55,8 +71,7 @@ export default {
   /**
    * Update current log level
    */
-  // eslint-disable-next-line no-unused-vars
   set: newLevel => {
-    //
+    level = newLevel;
   }
 };

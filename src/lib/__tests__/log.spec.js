@@ -55,11 +55,25 @@ describe("Log Library", () => {
     spyConsoleLog.mockRestore();
   });
   it("Supports dynamic log level setting", () => {
-    const spy = jest.spyOn(console, "error").mockImplementation();
+    const spyError = jest.spyOn(console, "error").mockImplementation();
+    const spyLog = jest.spyOn(console, "log").mockImplementation();
+
+    // Set to silent
     log.set(log.level.silent);
     log.fatal("fatal");
+    log.trace("trace");
     // eslint-disable-next-line no-console
     expect(console.error).not.toBeCalled();
-    spy.mockRestore();
+    // eslint-disable-next-line no-console
+    expect(console.log).not.toBeCalled();
+
+    // Set to all
+    log.set(log.level.all);
+    log.trace("trace");
+    // eslint-disable-next-line no-console
+    expect(console.log).toBeCalled();
+
+    spyError.mockRestore();
+    spyLog.mockRestore();
   });
 });
