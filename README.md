@@ -15,7 +15,7 @@ JSON:API Gateway for AWS Lambda in Node.js
 Most of what I have found:
 
 * Focuses on routing, which I believe should be boilerplate we abstract away by following a REST vocabulary
-* Is agnoistic on the schema of the response, which I believe leaves a lot for the developer to figure out
+* Is agonistic on the schema of the response, which I believe leaves a lot for the developer to figure out
 
 ## License
 
