@@ -33,7 +33,7 @@ function checkLogLevel(testLevel) {
   return level <= testLevel;
 }
 
-export default {
+const logPrimitives = {
   fatal: message => {
     if (checkLogLevel(levels.fatal)) logger.fatal(message);
   },
@@ -51,7 +51,16 @@ export default {
   },
   trace: message => {
     if (checkLogLevel(levels.trace)) logger.debug(message);
-  },
+  }
+};
+
+export default {
+  fatal: logPrimitives.fatal,
+  error: logPrimitives.error,
+  warn: logPrimitives.warn,
+  info: logPrimitives.info,
+  debug: logPrimitives.debug,
+  trace: logPrimitives.trace,
 
   /**
    * Logs an info and debug message, subject to level settings
