@@ -79,11 +79,46 @@ export default {
   level: levels,
 
   /**
+   * Allowed log levels (for aesthetic purposes)
+   */
+  all: levels.all,
+  none: levels.none,
+  silent: levels.silent,
+
+  /**
    * Update current log level
    */
   set: newLevel => {
     // Optimistically set the new log level
     logLevel = newLevel;
+
+    // If passing a log function as the level, set the level
+    if (typeof newLevel === "function") {
+      switch (newLevel) {
+        case logPrimitives.fatal:
+          logLevel = levels.fatal;
+          break;
+        case logPrimitives.error:
+          logLevel = levels.error;
+          break;
+        case logPrimitives.warn:
+          logLevel = levels.warn;
+          break;
+        case logPrimitives.info:
+          logLevel = levels.info;
+          break;
+        case logPrimitives.debug:
+          logLevel = levels.debug;
+          break;
+        case logPrimitives.trace:
+          logLevel = levels.trace;
+          break;
+
+        default:
+          logLevel = DEFAULT_LOG_LEVEL;
+          break;
+      }
+    }
 
     // Turn on debugging mode in lambda-log if necessary
     if (checkLogLevel(levels.debug)) {
