@@ -29,28 +29,28 @@ const logger = new log.LambdaLog(
   }
 );
 
-function logLevel(testLevel) {
+function checkLogLevel(testLevel) {
   return level <= testLevel;
 }
 
 export default {
   fatal: message => {
-    if (logLevel(levels.fatal)) logger.fatal(message);
+    if (checkLogLevel(levels.fatal)) logger.fatal(message);
   },
   error: message => {
-    if (logLevel(levels.error)) logger.error(message);
+    if (checkLogLevel(levels.error)) logger.error(message);
   },
   warn: message => {
-    if (logLevel(levels.warn)) logger.warn(message);
+    if (checkLogLevel(levels.warn)) logger.warn(message);
   },
   info: message => {
-    if (logLevel(levels.info)) logger.info(message);
+    if (checkLogLevel(levels.info)) logger.info(message);
   },
   debug: message => {
-    if (logLevel(levels.debug)) logger.debug(message);
+    if (checkLogLevel(levels.debug)) logger.debug(message);
   },
   trace: message => {
-    if (logLevel(levels.trace)) logger.debug(message);
+    if (checkLogLevel(levels.trace)) logger.debug(message);
   },
 
   /**
