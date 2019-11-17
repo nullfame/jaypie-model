@@ -17,6 +17,25 @@ Most of what I have found:
 * Focuses on routing, which I believe should be boilerplate we abstract away by following a REST vocabulary
 * Is agonistic on the schema of the response, which I believe leaves a lot for the developer to figure out
 
+## Project Status
+
+| Item           | Status                |
+| -------------- | --------------------- |
+| Models         | In Progress           |
+| Controllers    | Not Started           |
+| Logging Module | Functionally Complete |
+| Error Module   | Not Started           |
+| Error Handling | Not Started           |
+
+### Status List
+
+* Complete
+* Functionally Complete
+* Viable
+* In Progress
+* Incomplete
+* Not Started
+
 ## License
 
 All rights reserved.  Safe for use around pets.
