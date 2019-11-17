@@ -12,13 +12,13 @@ const levels = {
   silent: 99
 };
 
-let level =
+let logLevel =
   Object.keys(levels).indexOf(process.env.LOG_LEVEL) > -1
     ? levels[process.env.LOG_LEVEL]
     : levels.info;
 
-const debug = levels.debug >= level;
-const silent = level === levels.silent;
+const debug = levels.debug >= logLevel;
+const silent = logLevel === levels.silent;
 
 const dev = process.env.LOG_PRETTY_PRINT === "true";
 
@@ -30,7 +30,7 @@ const logger = new log.LambdaLog(
 );
 
 function checkLogLevel(testLevel) {
-  return level <= testLevel;
+  return logLevel <= testLevel;
 }
 
 const logPrimitives = {
@@ -81,6 +81,6 @@ export default {
    * Update current log level
    */
   set: newLevel => {
-    level = newLevel;
+    logLevel = newLevel;
   }
 };
