@@ -81,7 +81,10 @@ export default {
    * Update current log level
    */
   set: newLevel => {
+    // Optimistically set the new log level
     logLevel = newLevel;
+
+    // Turn on debugging mode in lambda-log if necessary
     if (checkLogLevel(levels.debug)) {
       logger.options.debug = true;
     } else {
