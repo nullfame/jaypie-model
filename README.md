@@ -36,6 +36,43 @@ Most of what I have found:
 * Incomplete
 * Not Started
 
+## Usage
+
+### Declaring Models
+
+Models are designed to feel like classes to the object-oriented programmer.
+
+* The simplest, but not preferred, way of declaring models is passing an array of attributes as strings
+* You can initialize models by passing an object to set initial values
+* Then you can interact with attributes in a natural manner
+
+``` javascript
+TodoItem = Model.new(["text", "done"]);
+groceryTodo = new TodoItem({ text: "Go to grocery", done: false });
+groceryTodo.done = true;
+```
+
+A more explicit way to define models would be to pass an array of attribute objects that provide the name and, optionally, type and default value:
+
+``` javascript
+TodoItem = Model.new([
+  { name: "text", type: Model.type.string },
+  { name: "done", type: Model.type.boolean, default: false }
+]);
+groceryTodo = new TodoItem({ text: "Go to grocery", done: false });
+groceryTodo.done = true;
+```
+
+#### Attribute Types
+
+When attribute types are set, items will throw errors when improper values are passed.
+
+* Model.type.any: no types enforced (default)
+* Model.type.boolean
+* Model.type.date
+* Model.type.number
+* Model.type.string
+
 ## License
 
 All rights reserved.  Safe for use around pets.
