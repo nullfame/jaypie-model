@@ -2,6 +2,7 @@ import log from "../log";
 
 describe("Log Library", () => {
   it("Supports trace log level", () => {
+    log.set(log.level.trace);
     const spy = jest.spyOn(console, "log").mockImplementation();
     log.trace("trace");
     // eslint-disable-next-line no-console
@@ -9,6 +10,7 @@ describe("Log Library", () => {
     spy.mockRestore();
   });
   it("Supports debug log level", () => {
+    log.set(log.level.debug);
     const spy = jest.spyOn(console, "log").mockImplementation();
     log.debug("debug");
     // eslint-disable-next-line no-console
