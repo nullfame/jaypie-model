@@ -50,7 +50,7 @@ export default {
     if (logLevel(levels.debug)) logger.debug(message);
   },
   trace: message => {
-    if (logLevel(levels.debug)) logger.debug(message);
+    if (logLevel(levels.trace)) logger.debug(message);
   },
 
   /**
