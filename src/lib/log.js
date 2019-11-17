@@ -120,6 +120,16 @@ export default {
       }
     }
 
+    // Sanity check the new level
+    if (typeof logLevel === "number") {
+      // Confirm it is a number in our supported set
+      if (Object.values(levels).indexOf(logLevel) === -1) {
+        logLevel = DEFAULT_LOG_LEVEL;
+      }
+    } else {
+      logLevel = DEFAULT_LOG_LEVEL;
+    }
+
     // Turn on debugging mode in lambda-log if necessary
     if (checkLogLevel(levels.debug)) {
       logger.options.debug = true;
