@@ -82,5 +82,10 @@ export default {
    */
   set: newLevel => {
     logLevel = newLevel;
+    if (checkLogLevel(levels.debug)) {
+      logger.options.debug = true;
+    } else {
+      logger.options.debug = false;
+    }
   }
 };
