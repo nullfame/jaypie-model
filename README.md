@@ -67,11 +67,11 @@ groceryTodo.done = true;
 
 When attribute types are set, items will throw errors when improper values are passed.
 
-* Model.type.any: no types enforced (default)
-* Model.type.boolean
-* Model.type.date
-* Model.type.number
-* Model.type.string
+* `Model.type.any` - no types enforced (default)
+* `Model.type.boolean`
+* `Model.type.date`
+* `Model.type.number`
+* `Model.type.string`
 
 ## License
 
