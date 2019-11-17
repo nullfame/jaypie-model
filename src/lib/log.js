@@ -11,11 +11,12 @@ const levels = {
   none: 99,
   silent: 99
 };
+const DEFAULT_LOG_LEVEL = levels.info;
 
 let logLevel =
   Object.keys(levels).indexOf(process.env.LOG_LEVEL) > -1
     ? levels[process.env.LOG_LEVEL]
-    : levels.info;
+    : DEFAULT_LOG_LEVEL;
 
 const debug = levels.debug >= logLevel;
 const silent = logLevel === levels.silent;
