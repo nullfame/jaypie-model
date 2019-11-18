@@ -12,6 +12,9 @@ export default {
     let attributes;
     if (Array.isArray(configuration)) {
       attributes = configuration;
+    } else if (typeof configuration === "object") {
+      // eslint-disable-next-line prefer-destructuring
+      attributes = configuration.attributes;
     } else {
       throw Error(`Jaypie: Model.new: Invalid Configuration: ${configuration}`);
     }
