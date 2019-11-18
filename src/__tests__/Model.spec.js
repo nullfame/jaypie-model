@@ -192,5 +192,5 @@ describe("TodoItem from Model.new", () => {
       expect(modelString).toEqual(`[Class: Model]`);
       // expect(modelString).toEqual([Model: text=${Model.type.string} done=${Model.type.boolean}]`);
     });
-  });
+  }); // END describe Aesthetics
 }); // END "TodoItem from Model.new"
