@@ -228,5 +228,10 @@ describe("TodoItem from Model.new", () => {
         TestModel = Model.new({});
       }).toThrow("Invalid Configuration");
     });
+    it("Throws when attributes array is empty", () => {
+      expect(() => {
+        TestModel = Model.new({ attributes: [] });
+      }).toThrow("attribute array cannot be empty");
+    });
   });
 }); // END "TodoItem from Model.new"

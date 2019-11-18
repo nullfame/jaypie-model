@@ -24,6 +24,13 @@ export default {
       throw Error(`Jaypie: Model.new: Invalid Configuration: ${configuration}`);
     }
 
+    // Validate attributes array has items
+    if (attributes.length === 0) {
+      throw Error(
+        `Jaypie: Model.new: Invalid Configuration: attribute array cannot be empty`
+      );
+    }
+
     // Validate attribute params at class creation (before first instantiation)
     attributes.forEach(attribute => {
       if (typeof attribute === "object") {
