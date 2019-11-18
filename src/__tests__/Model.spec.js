@@ -223,5 +223,10 @@ describe("TodoItem from Model.new", () => {
         TestModel = Model.new(12);
       }).toThrow("Invalid Configuration: 12");
     });
+    it("Throws when attributes are missing from configuration object", () => {
+      expect(() => {
+        TestModel = Model.new({});
+      }).toThrow("Invalid Configuration");
+    });
   });
 }); // END "TodoItem from Model.new"
