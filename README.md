@@ -20,20 +20,22 @@ Most of what I have found:
 
 ## Project Status
 
-| Item           | Status                |
-| -------------- | --------------------- |
-| Models         | In Progress           |
-| Controllers    | Not Started           |
-| Logging Module | Functionally Complete |
-| Error Module   | Not Started           |
-| Error Handling | Not Started           |
+| Item           | Status      |
+| -------------- | ----------- |
+| Models         | In Progress |
+| Controllers    | Not Started |
+| Logging Module | Functional  |
+| Error Module   | Not Started |
+| Error Handling | Not Started |
+| Validation     | Incomplete  |
+| ORM            | Not Started |
 
 ### Status List
 
-* Complete
-* Functionally Complete
-* Viable
-* In Progress
+* Complete (fully realized vision)
+* Viable (complete enough to release)
+* Functional (complete enough to satisfy dependencies)
+* In Progress (active development effort)
 * Incomplete
 * Not Started
 
