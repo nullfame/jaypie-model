@@ -12,6 +12,8 @@ export default {
     let attributes;
     if (Array.isArray(configuration)) {
       attributes = configuration;
+    } else {
+      throw Error(`Jaypie: Model.new: Invalid Configuration: ${configuration}`);
     }
 
     // Validate attribute params at class creation (before first instantiation)

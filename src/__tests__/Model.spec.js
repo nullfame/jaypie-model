@@ -193,4 +193,12 @@ describe("TodoItem from Model.new", () => {
       // expect(modelString).toEqual([Model: text=${Model.type.string} done=${Model.type.boolean}]`);
     });
   }); // END describe Aesthetics
+
+  describe("General error cases", () => {
+    it("Throws when configuration is not array or object", () => {
+      expect(() => {
+        TestModel = Model.new(12);
+      }).toThrow("Invalid Configuration: 12");
+    });
+  });
 }); // END "TodoItem from Model.new"
