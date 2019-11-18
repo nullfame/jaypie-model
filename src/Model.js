@@ -6,9 +6,14 @@ const RESERVED_ATTRIBUTE_NAMES = ["inspect", "private"];
 export default {
   /**
    * Create a new model
-   * @param {string[]|object[]} attributes fields on this model (defaults to type any)
+   * @param {string[]|object[]} configuration fields on this model (defaults to type any)
    */
-  new: attributes => {
+  new: configuration => {
+    let attributes;
+    if (Array.isArray(configuration)) {
+      attributes = configuration;
+    }
+
     // Validate attribute params at class creation (before first instantiation)
     attributes.forEach(attribute => {
       if (typeof attribute === "object") {
